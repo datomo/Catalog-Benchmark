@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="7aaf8e33-1e8c-44fa-a459-726a97b9da9b" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DefaultGradleProjectSettings">
+    <option name="isMigrated" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1Xf93hUwAisOIgw4WcW5PGT5qzL" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="extract.method.default.visibility" value="private" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Polypheny-DB" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.annotationProcessors" />
+  </component>
+  <component name="RunManager">
+    <configuration name="MapDBTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.polypheny.db.MapDBTest" />
+      <module name="MapDBTest" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.MapDBTest" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7aaf8e33-1e8c-44fa-a459-726a97b9da9b" name="Default Changelist" comment="" />
+      <created>1581426084518</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1581426084518</updated>
+      <workItem from="1581426087611" duration="951000" />
+      <workItem from="1581589738477" duration="12620000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="515" y="271" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1581591946549">
+      <screen x="0" y="0" width="1500" height="960" />
+    </state>
+    <state x="515" y="271" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1500.960@0.0.1500.960" timestamp="1581591946549" />
+    <state x="556" y="185" key="#com.intellij.ide.util.MemberChooser" timestamp="1581602379606">
+      <screen x="0" y="0" width="1500" height="960" />
+    </state>
+    <state x="556" y="185" key="#com.intellij.ide.util.MemberChooser/0.0.1500.960@0.0.1500.960" timestamp="1581602379606" />
+    <state x="908" y="313" key="FileChooserDialogImpl" timestamp="1581596439281">
+      <screen x="0" y="0" width="1500" height="960" />
+    </state>
+    <state x="-860" y="456" key="FileChooserDialogImpl/0.0.1500.960/-2560.0.2560.1400@-2560.0.2560.1400" timestamp="1581427040450" />
+    <state x="908" y="313" key="FileChooserDialogImpl/0.0.1500.960@0.0.1500.960" timestamp="1581596439281" />
+    <state width="1458" height="235" key="GridCell.Tab.0.bottom" timestamp="1581605885959">
+      <screen x="0" y="0" width="1500" height="960" />
+    </state>
+    <state width="1236" height="398" key="GridCell.Tab.0.bottom/0.0.1500.960/-2560.0.2560.1400@-2560.0.2560.1400" timestamp="1581427042325" />
+    <state width="1458" height="235" key="GridCell.Tab.0.bottom/0.0.1500.960@0.0.1500.960" timestamp="1581605885959" />
+    <state width="1458" height="235" key="GridCell.Tab.0.center" timestamp="1581605885959">
+      <screen x="0" y="0" width="1500" height="960" />
+    </state>
+    <state width="1236" height="398" key="GridCell.Tab.0.center/0.0.1500.960/-2560.0.2560.1400@-2560.0.2560.1400" timestamp="1581427042325" />
+    <state width="1458" height="235" key="GridCell.Tab.0.center/0.0.1500.960@0.0.1500.960" timestamp="1581605885959" />
+    <state width="1458" height="235" key="GridCell.Tab.0.left" timestamp="1581605885959">
+      <screen x="0" y="0" width="1500" height="960" />
+    </state>
+    <state width="1236" height="398" key="GridCell.Tab.0.left/0.0.1500.960/-2560.0.2560.1400@-2560.0.2560.1400" timestamp="1581427042324" />
+    <state width="1458" height="235" key="GridCell.Tab.0.left/0.0.1500.960@0.0.1500.960" timestamp="1581605885959" />
+    <state width="1458" height="235" key="GridCell.Tab.0.right" timestamp="1581605885959">
+      <screen x="0" y="0" width="1500" height="960" />
+    </state>
+    <state width="1236" height="398" key="GridCell.Tab.0.right/0.0.1500.960/-2560.0.2560.1400@-2560.0.2560.1400" timestamp="1581427042325" />
+    <state width="1458" height="235" key="GridCell.Tab.0.right/0.0.1500.960@0.0.1500.960" timestamp="1581605885959" />
+    <state width="1458" height="294" key="GridCell.Tab.1.bottom" timestamp="1581605519830">
+      <screen x="0" y="0" width="1500" height="960" />
+    </state>
+    <state width="1458" height="294" key="GridCell.Tab.1.bottom/0.0.1500.960@0.0.1500.960" timestamp="1581605519830" />
+    <state width="1458" height="294" key="GridCell.Tab.1.center" timestamp="1581605519830">
+      <screen x="0" y="0" width="1500" height="960" />
+    </state>
+    <state width="1458" height="294" key="GridCell.Tab.1.center/0.0.1500.960@0.0.1500.960" timestamp="1581605519830" />
+    <state width="1458" height="294" key="GridCell.Tab.1.left" timestamp="1581605519830">
+      <screen x="0" y="0" width="1500" height="960" />
+    </state>
+    <state width="1458" height="294" key="GridCell.Tab.1.left/0.0.1500.960@0.0.1500.960" timestamp="1581605519830" />
+    <state width="1458" height="294" key="GridCell.Tab.1.right" timestamp="1581605519830">
+      <screen x="0" y="0" width="1500" height="960" />
+    </state>
+    <state width="1458" height="294" key="GridCell.Tab.1.right/0.0.1500.960@0.0.1500.960" timestamp="1581605519830" />
+    <state x="464" y="113" key="SettingsEditor" timestamp="1581599314352">
+      <screen x="0" y="0" width="1500" height="960" />
+    </state>
+    <state x="-1139" y="343" key="SettingsEditor/0.0.1500.960/-2560.0.2560.1400@-2560.0.2560.1400" timestamp="1581426466819" />
+    <state x="464" y="113" key="SettingsEditor/0.0.1500.960@0.0.1500.960" timestamp="1581599314352" />
+    <state x="948" y="454" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1581599275436">
+      <screen x="0" y="0" width="1500" height="960" />
+    </state>
+    <state x="-915" y="662" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.0.1500.960/-2560.0.2560.1400@-2560.0.2560.1400" timestamp="1581426228365" />
+    <state x="948" y="454" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.0.1500.960@0.0.1500.960" timestamp="1581599275436" />
+    <state x="481" y="226" key="extract.method.dialog" timestamp="1581605569800">
+      <screen x="0" y="0" width="1500" height="960" />
+    </state>
+    <state x="481" y="226" key="extract.method.dialog/0.0.1500.960@0.0.1500.960" timestamp="1581605569800" />
+    <state x="493" y="92" key="refactoring.ChangeSignatureDialog" timestamp="1581598999364">
+      <screen x="0" y="0" width="1500" height="960" />
+    </state>
+    <state x="493" y="92" key="refactoring.ChangeSignatureDialog/0.0.1500.960@0.0.1500.960" timestamp="1581598999364" />
+    <state x="410" y="136" width="672" height="676" key="search.everywhere.popup" timestamp="1581605497591">
+      <screen x="0" y="0" width="1500" height="960" />
+    </state>
+    <state x="410" y="136" width="672" height="676" key="search.everywhere.popup/0.0.1500.960@0.0.1500.960" timestamp="1581605497591" />
+  </component>
+</project>
