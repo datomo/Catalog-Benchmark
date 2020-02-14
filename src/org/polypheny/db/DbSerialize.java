@@ -4,6 +4,7 @@ package org.polypheny.db;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import org.jetbrains.annotations.NotNull;
 import org.mapdb.DataInput2;
@@ -18,21 +19,17 @@ public class DbSerialize {
 
     static class SchemaSerializer implements Serializer<SchemaEntry>, Serializable {
 
+
         @Override
         public void serialize( @NotNull DataOutput2 dataOutput2, @NotNull SchemaEntry schema ) throws IOException {
             dataOutput2.writeUTF( schema.getName() );
-            TableListSerializer serializer = new TableListSerializer();
-            serializer.serialize( dataOutput2, schema.getTables() );
 
         }
 
 
         @Override
         public SchemaEntry deserialize( @NotNull DataInput2 dataInput2, int i ) throws IOException {
-            String name = dataInput2.readUTF();
-            TableListSerializer serializer = new TableListSerializer();
-            List<TableEntry> tables = new ArrayList( serializer.deserialize( dataInput2, i ) );
-            return new SchemaEntry( name, tables );
+            return new SchemaEntry( dataInput2.readUTF() );
         }
     }
 
@@ -40,15 +37,23 @@ public class DbSerialize {
     /**
      * TODO: list list list why
      */
-    static class TableListSerializer implements Serializer<List<TableEntry>>, Serializable {
+    static class ListSerializer<T> implements Serializer<List<T>>, Serializable {
+
+        final public Serializer<T> serializer;
+
+
+        public ListSerializer( @NotNull Serializer<T> serializer ) {
+            this.serializer = serializer;
+        }
+
 
         @Override
-        public void serialize( @NotNull DataOutput2 dataOutput2, @NotNull List<TableEntry> list ) throws IOException {
+        public void serialize( @NotNull DataOutput2 dataOutput2, @NotNull List<T> list ) throws IOException {
             dataOutput2.writeInt( list.size() );
-            TableSerializer serializer = new TableSerializer();
+
             list.forEach( e -> {
                 try {
-                    serializer.serialize( dataOutput2, e );
+                    this.serializer.serialize( dataOutput2, e );
                 } catch ( IOException ex ) {
                     ex.printStackTrace();
                 }
@@ -57,14 +62,19 @@ public class DbSerialize {
 
 
         @Override
-        public List<TableEntry> deserialize( @NotNull DataInput2 dataInput2, int i ) throws IOException {
+        public List<T> deserialize( @NotNull DataInput2 dataInput2, int i ) throws IOException {
             int size = dataInput2.readInt();
-            List<TableEntry> tables = new ArrayList<>();
-            TableSerializer serializer = new TableSerializer();
+            List<T> tables = new ArrayList<>();
             for ( int j = 0; j < size; j++ ) {
                 tables.add( serializer.deserialize( dataInput2, i ) );
             }
-            return tables;
+            return Collections.unmodifiableList( tables );
+        }
+
+
+        @Override
+        public boolean equals( Object obj ) {
+            return false;
         }
     }
 
@@ -79,6 +89,7 @@ public class DbSerialize {
 
         @Override
         public TableEntry deserialize( @NotNull DataInput2 dataInput2, int i ) throws IOException {
+            String name = dataInput2.readUTF();
             return new TableEntry( dataInput2.readUTF() );
         }
     }
