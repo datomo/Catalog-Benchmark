@@ -1,0 +1,81 @@
+2020/02/14-20:03:21.661741 5a0 RocksDB version: 5.18.0
+2020/02/14-20:03:21.661855 5a0 Git sha rocksdb_build_git_sha:@257b458121b7c684f432838ca0e45c1500744c89@
+2020/02/14-20:03:21.661883 5a0 Compile date Dec 19 2018
+2020/02/14-20:03:21.661911 5a0 DB SUMMARY
+2020/02/14-20:03:21.662063 5a0 SST files in rockdb.db_not_found dir, Total Num: 0, files: 
+2020/02/14-20:03:21.662090 5a0 Write Ahead Log file in rockdb.db_not_found: 
+2020/02/14-20:03:21.662110 5a0                         Options.error_if_exists: 0
+2020/02/14-20:03:21.662137 5a0                       Options.create_if_missing: 0
+2020/02/14-20:03:21.662156 5a0                         Options.paranoid_checks: 1
+2020/02/14-20:03:21.662174 5a0                                     Options.env: 0000000000D94A30
+2020/02/14-20:03:21.662315 5a0                                Options.info_log: 0000000000DD83A0
+2020/02/14-20:03:21.662330 5a0                Options.max_file_opening_threads: 16
+2020/02/14-20:03:21.662339 5a0                              Options.statistics: 0000000000000000
+2020/02/14-20:03:21.662348 5a0                               Options.use_fsync: 0
+2020/02/14-20:03:21.662356 5a0                       Options.max_log_file_size: 0
+2020/02/14-20:03:21.662365 5a0                  Options.max_manifest_file_size: 1073741824
+2020/02/14-20:03:21.662373 5a0                   Options.log_file_time_to_roll: 0
+2020/02/14-20:03:21.662381 5a0                       Options.keep_log_file_num: 1000
+2020/02/14-20:03:21.662390 5a0                    Options.recycle_log_file_num: 0
+2020/02/14-20:03:21.662398 5a0                         Options.allow_fallocate: 1
+2020/02/14-20:03:21.662406 5a0                        Options.allow_mmap_reads: 0
+2020/02/14-20:03:21.662414 5a0                       Options.allow_mmap_writes: 0
+2020/02/14-20:03:21.662422 5a0                        Options.use_direct_reads: 0
+2020/02/14-20:03:21.662430 5a0                        Options.use_direct_io_for_flush_and_compaction: 0
+2020/02/14-20:03:21.662439 5a0          Options.create_missing_column_families: 0
+2020/02/14-20:03:21.662447 5a0                              Options.db_log_dir: 
+2020/02/14-20:03:21.662455 5a0                                 Options.wal_dir: rockdb.db_not_found
+2020/02/14-20:03:21.662463 5a0                Options.table_cache_numshardbits: 6
+2020/02/14-20:03:21.662471 5a0                      Options.max_subcompactions: 1
+2020/02/14-20:03:21.662479 5a0                  Options.max_background_flushes: -1
+2020/02/14-20:03:21.662491 5a0                         Options.WAL_ttl_seconds: 0
+2020/02/14-20:03:21.662500 5a0                       Options.WAL_size_limit_MB: 0
+2020/02/14-20:03:21.662507 5a0             Options.manifest_preallocation_size: 4194304
+2020/02/14-20:03:21.662515 5a0                     Options.is_fd_close_on_exec: 1
+2020/02/14-20:03:21.662523 5a0                   Options.advise_random_on_open: 1
+2020/02/14-20:03:21.662531 5a0                    Options.db_write_buffer_size: 0
+2020/02/14-20:03:21.662539 5a0                    Options.write_buffer_manager: 0000000000DD3FD0
+2020/02/14-20:03:21.662548 5a0         Options.access_hint_on_compaction_start: 1
+2020/02/14-20:03:21.662555 5a0  Options.new_table_reader_for_compaction_inputs: 0
+2020/02/14-20:03:21.662563 5a0           Options.random_access_max_buffer_size: 1048576
+2020/02/14-20:03:21.662571 5a0                      Options.use_adaptive_mutex: 0
+2020/02/14-20:03:21.662579 5a0                            Options.rate_limiter: 0000000000000000
+2020/02/14-20:03:21.662588 5a0     Options.sst_file_manager.rate_bytes_per_sec: 0
+2020/02/14-20:03:21.662596 5a0                       Options.wal_recovery_mode: 2
+2020/02/14-20:03:21.662604 5a0                  Options.enable_thread_tracking: 0
+2020/02/14-20:03:21.662612 5a0                  Options.enable_pipelined_write: 0
+2020/02/14-20:03:21.662619 5a0         Options.allow_concurrent_memtable_write: 1
+2020/02/14-20:03:21.662627 5a0      Options.enable_write_thread_adaptive_yield: 1
+2020/02/14-20:03:21.662635 5a0             Options.write_thread_max_yield_usec: 100
+2020/02/14-20:03:21.662643 5a0            Options.write_thread_slow_yield_usec: 3
+2020/02/14-20:03:21.662688 5a0                               Options.row_cache: None
+2020/02/14-20:03:21.662700 5a0                              Options.wal_filter: None
+2020/02/14-20:03:21.662708 5a0             Options.avoid_flush_during_recovery: 0
+2020/02/14-20:03:21.662716 5a0             Options.allow_ingest_behind: 0
+2020/02/14-20:03:21.662724 5a0             Options.preserve_deletes: 0
+2020/02/14-20:03:21.662731 5a0             Options.two_write_queues: 0
+2020/02/14-20:03:21.662739 5a0             Options.manual_wal_flush: 0
+2020/02/14-20:03:21.662746 5a0             Options.max_background_jobs: 2
+2020/02/14-20:03:21.662754 5a0             Options.max_background_compactions: -1
+2020/02/14-20:03:21.662762 5a0             Options.avoid_flush_during_shutdown: 0
+2020/02/14-20:03:21.662770 5a0           Options.writable_file_max_buffer_size: 1048576
+2020/02/14-20:03:21.662778 5a0             Options.delayed_write_rate : 16777216
+2020/02/14-20:03:21.662786 5a0             Options.max_total_wal_size: 0
+2020/02/14-20:03:21.662793 5a0             Options.delete_obsolete_files_period_micros: 21600000000
+2020/02/14-20:03:21.662802 5a0                   Options.stats_dump_period_sec: 600
+2020/02/14-20:03:21.662810 5a0                          Options.max_open_files: -1
+2020/02/14-20:03:21.662817 5a0                          Options.bytes_per_sync: 0
+2020/02/14-20:03:21.662825 5a0                      Options.wal_bytes_per_sync: 0
+2020/02/14-20:03:21.662833 5a0       Options.compaction_readahead_size: 0
+2020/02/14-20:03:21.662850 5a0 Compression algorithms supported:
+2020/02/14-20:03:21.662872 5a0 	kZSTD supported: 1
+2020/02/14-20:03:21.662881 5a0 	kSnappyCompression supported: 1
+2020/02/14-20:03:21.662888 5a0 	kBZip2Compression supported: 0
+2020/02/14-20:03:21.662896 5a0 	kZlibCompression supported: 1
+2020/02/14-20:03:21.662903 5a0 	kLZ4Compression supported: 1
+2020/02/14-20:03:21.662911 5a0 	kXpressCompression supported: 1
+2020/02/14-20:03:21.662918 5a0 	kLZ4HCCompression supported: 1
+2020/02/14-20:03:21.662926 5a0 	kZSTDNotFinalCompression supported: 1
+2020/02/14-20:03:21.662942 5a0 Fast CRC32 supported: Supported on x86
+2020/02/14-20:03:21.663547 5a0 [db\db_impl.cc:388] Shutdown: canceling all background work
+2020/02/14-20:03:21.663671 5a0 [db\db_impl.cc:562] Shutdown complete

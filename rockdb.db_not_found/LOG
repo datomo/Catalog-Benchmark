@@ -1,0 +1,81 @@
+2020/02/14-20:05:03.673056 2bf4 RocksDB version: 5.18.0
+2020/02/14-20:05:03.673133 2bf4 Git sha rocksdb_build_git_sha:@257b458121b7c684f432838ca0e45c1500744c89@
+2020/02/14-20:05:03.673152 2bf4 Compile date Dec 19 2018
+2020/02/14-20:05:03.673171 2bf4 DB SUMMARY
+2020/02/14-20:05:03.673292 2bf4 SST files in rockdb.db_not_found dir, Total Num: 0, files: 
+2020/02/14-20:05:03.673311 2bf4 Write Ahead Log file in rockdb.db_not_found: 
+2020/02/14-20:05:03.673324 2bf4                         Options.error_if_exists: 0
+2020/02/14-20:05:03.673343 2bf4                       Options.create_if_missing: 0
+2020/02/14-20:05:03.673355 2bf4                         Options.paranoid_checks: 1
+2020/02/14-20:05:03.673368 2bf4                                     Options.env: 00000000008D5FD0
+2020/02/14-20:05:03.673520 2bf4                                Options.info_log: 000000000090DBF0
+2020/02/14-20:05:03.673531 2bf4                Options.max_file_opening_threads: 16
+2020/02/14-20:05:03.673537 2bf4                              Options.statistics: 0000000000000000
+2020/02/14-20:05:03.673543 2bf4                               Options.use_fsync: 0
+2020/02/14-20:05:03.673549 2bf4                       Options.max_log_file_size: 0
+2020/02/14-20:05:03.673555 2bf4                  Options.max_manifest_file_size: 1073741824
+2020/02/14-20:05:03.673560 2bf4                   Options.log_file_time_to_roll: 0
+2020/02/14-20:05:03.673566 2bf4                       Options.keep_log_file_num: 1000
+2020/02/14-20:05:03.673572 2bf4                    Options.recycle_log_file_num: 0
+2020/02/14-20:05:03.673577 2bf4                         Options.allow_fallocate: 1
+2020/02/14-20:05:03.673583 2bf4                        Options.allow_mmap_reads: 0
+2020/02/14-20:05:03.673588 2bf4                       Options.allow_mmap_writes: 0
+2020/02/14-20:05:03.673594 2bf4                        Options.use_direct_reads: 0
+2020/02/14-20:05:03.673599 2bf4                        Options.use_direct_io_for_flush_and_compaction: 0
+2020/02/14-20:05:03.673605 2bf4          Options.create_missing_column_families: 0
+2020/02/14-20:05:03.673610 2bf4                              Options.db_log_dir: 
+2020/02/14-20:05:03.673616 2bf4                                 Options.wal_dir: rockdb.db_not_found
+2020/02/14-20:05:03.673622 2bf4                Options.table_cache_numshardbits: 6
+2020/02/14-20:05:03.673627 2bf4                      Options.max_subcompactions: 1
+2020/02/14-20:05:03.673633 2bf4                  Options.max_background_flushes: -1
+2020/02/14-20:05:03.673641 2bf4                         Options.WAL_ttl_seconds: 0
+2020/02/14-20:05:03.673647 2bf4                       Options.WAL_size_limit_MB: 0
+2020/02/14-20:05:03.673652 2bf4             Options.manifest_preallocation_size: 4194304
+2020/02/14-20:05:03.673658 2bf4                     Options.is_fd_close_on_exec: 1
+2020/02/14-20:05:03.673663 2bf4                   Options.advise_random_on_open: 1
+2020/02/14-20:05:03.673669 2bf4                    Options.db_write_buffer_size: 0
+2020/02/14-20:05:03.673674 2bf4                    Options.write_buffer_manager: 0000000000906490
+2020/02/14-20:05:03.673679 2bf4         Options.access_hint_on_compaction_start: 1
+2020/02/14-20:05:03.673685 2bf4  Options.new_table_reader_for_compaction_inputs: 0
+2020/02/14-20:05:03.673690 2bf4           Options.random_access_max_buffer_size: 1048576
+2020/02/14-20:05:03.673695 2bf4                      Options.use_adaptive_mutex: 0
+2020/02/14-20:05:03.673701 2bf4                            Options.rate_limiter: 0000000000000000
+2020/02/14-20:05:03.673706 2bf4     Options.sst_file_manager.rate_bytes_per_sec: 0
+2020/02/14-20:05:03.673712 2bf4                       Options.wal_recovery_mode: 2
+2020/02/14-20:05:03.673717 2bf4                  Options.enable_thread_tracking: 0
+2020/02/14-20:05:03.673723 2bf4                  Options.enable_pipelined_write: 0
+2020/02/14-20:05:03.673728 2bf4         Options.allow_concurrent_memtable_write: 1
+2020/02/14-20:05:03.673733 2bf4      Options.enable_write_thread_adaptive_yield: 1
+2020/02/14-20:05:03.673738 2bf4             Options.write_thread_max_yield_usec: 100
+2020/02/14-20:05:03.673769 2bf4            Options.write_thread_slow_yield_usec: 3
+2020/02/14-20:05:03.673776 2bf4                               Options.row_cache: None
+2020/02/14-20:05:03.673782 2bf4                              Options.wal_filter: None
+2020/02/14-20:05:03.673787 2bf4             Options.avoid_flush_during_recovery: 0
+2020/02/14-20:05:03.673793 2bf4             Options.allow_ingest_behind: 0
+2020/02/14-20:05:03.673798 2bf4             Options.preserve_deletes: 0
+2020/02/14-20:05:03.673803 2bf4             Options.two_write_queues: 0
+2020/02/14-20:05:03.673808 2bf4             Options.manual_wal_flush: 0
+2020/02/14-20:05:03.673813 2bf4             Options.max_background_jobs: 2
+2020/02/14-20:05:03.673818 2bf4             Options.max_background_compactions: -1
+2020/02/14-20:05:03.673824 2bf4             Options.avoid_flush_during_shutdown: 0
+2020/02/14-20:05:03.673829 2bf4           Options.writable_file_max_buffer_size: 1048576
+2020/02/14-20:05:03.673835 2bf4             Options.delayed_write_rate : 16777216
+2020/02/14-20:05:03.673840 2bf4             Options.max_total_wal_size: 0
+2020/02/14-20:05:03.673845 2bf4             Options.delete_obsolete_files_period_micros: 21600000000
+2020/02/14-20:05:03.673851 2bf4                   Options.stats_dump_period_sec: 600
+2020/02/14-20:05:03.673856 2bf4                          Options.max_open_files: -1
+2020/02/14-20:05:03.673861 2bf4                          Options.bytes_per_sync: 0
+2020/02/14-20:05:03.673867 2bf4                      Options.wal_bytes_per_sync: 0
+2020/02/14-20:05:03.673872 2bf4       Options.compaction_readahead_size: 0
+2020/02/14-20:05:03.673885 2bf4 Compression algorithms supported:
+2020/02/14-20:05:03.673901 2bf4 	kZSTD supported: 1
+2020/02/14-20:05:03.673907 2bf4 	kSnappyCompression supported: 1
+2020/02/14-20:05:03.673912 2bf4 	kBZip2Compression supported: 0
+2020/02/14-20:05:03.673917 2bf4 	kZlibCompression supported: 1
+2020/02/14-20:05:03.673922 2bf4 	kLZ4Compression supported: 1
+2020/02/14-20:05:03.673927 2bf4 	kXpressCompression supported: 1
+2020/02/14-20:05:03.673932 2bf4 	kLZ4HCCompression supported: 1
+2020/02/14-20:05:03.673937 2bf4 	kZSTDNotFinalCompression supported: 1
+2020/02/14-20:05:03.673949 2bf4 Fast CRC32 supported: Supported on x86
+2020/02/14-20:05:03.674321 2bf4 [db\db_impl.cc:388] Shutdown: canceling all background work
+2020/02/14-20:05:03.674431 2bf4 [db\db_impl.cc:562] Shutdown complete

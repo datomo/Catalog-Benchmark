@@ -3,18 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="7aaf8e33-1e8c-44fa-a459-726a97b9da9b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MapDBTest/org/polypheny/db/DbSerialize$ColumnSerializer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MapDBTest/org/polypheny/db/DbSerialize$ColumnSerializer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MapDBTest/org/polypheny/db/DbSerialize$SchemaSerializer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MapDBTest/org/polypheny/db/DbSerialize$SchemaSerializer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MapDBTest/org/polypheny/db/DbSerialize$TableListSerializer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MapDBTest/org/polypheny/db/DbSerialize$TableSerializer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MapDBTest/org/polypheny/db/DbSerialize$TableSerializer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MapDBTest/org/polypheny/db/DbSerialize.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MapDBTest/org/polypheny/db/DbSerialize.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MapDBTest/org/polypheny/db/MapDBTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MapDBTest/org/polypheny/db/SchemaEntry.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MapDBTest/org/polypheny/db/SchemaEntry.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MapDBTest/org/polypheny/db/TableEntry.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MapDBTest/org/polypheny/db/TableEntry.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/polypheny/db/DbSerialize.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/polypheny/db/DbSerialize.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/polypheny/db/MapDBTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/polypheny/db/KeyValueStoresTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/polypheny/db/SchemaEntry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/polypheny/db/SchemaEntry.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/polypheny/db/TableEntry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/polypheny/db/TableEntry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MapDBTest.iml" beforeDir="false" afterPath="$PROJECT_DIR$/MapDBTest.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MapDBTest/org/polypheny/db/CatalogEntry.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MapDBTest/org/polypheny/db/CatalogEntry.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MapDBTest/org/polypheny/db/KeyValueStoresTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MapDBTest/org/polypheny/db/KeyValueStoresTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/polypheny/db/CatalogEntry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/polypheny/db/CatalogEntry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/polypheny/db/KeyValueStoresTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/polypheny/db/KeyValueStoresTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,7 +81,7 @@
       <updated>1581426084518</updated>
       <workItem from="1581426087611" duration="951000" />
       <workItem from="1581589738477" duration="12620000" />
-      <workItem from="1581699018690" duration="6261000" />
+      <workItem from="1581699018690" duration="10124000" />
     </task>
     <servers />
   </component>
@@ -95,6 +89,10 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="343" y="140" key="#Project_Structure" timestamp="1581706552307">
+      <screen x="0" y="0" width="1500" height="960" />
+    </state>
+    <state x="343" y="140" key="#Project_Structure/0.0.1500.960@0.0.1500.960" timestamp="1581706552307" />
     <state x="515" y="271" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1581591946549">
       <screen x="0" y="0" width="1500" height="960" />
     </state>
@@ -108,26 +106,26 @@
     </state>
     <state x="-860" y="456" key="FileChooserDialogImpl/0.0.1500.960/-2560.0.2560.1400@-2560.0.2560.1400" timestamp="1581427040450" />
     <state x="908" y="313" key="FileChooserDialogImpl/0.0.1500.960@0.0.1500.960" timestamp="1581704021288" />
-    <state width="1458" height="235" key="GridCell.Tab.0.bottom" timestamp="1581705348961">
+    <state width="1458" height="235" key="GridCell.Tab.0.bottom" timestamp="1581709489613">
       <screen x="0" y="0" width="1500" height="960" />
     </state>
     <state width="1236" height="398" key="GridCell.Tab.0.bottom/0.0.1500.960/-2560.0.2560.1400@-2560.0.2560.1400" timestamp="1581427042325" />
-    <state width="1458" height="235" key="GridCell.Tab.0.bottom/0.0.1500.960@0.0.1500.960" timestamp="1581705348961" />
-    <state width="1458" height="235" key="GridCell.Tab.0.center" timestamp="1581705348961">
+    <state width="1458" height="235" key="GridCell.Tab.0.bottom/0.0.1500.960@0.0.1500.960" timestamp="1581709489613" />
+    <state width="1458" height="235" key="GridCell.Tab.0.center" timestamp="1581709489613">
       <screen x="0" y="0" width="1500" height="960" />
     </state>
     <state width="1236" height="398" key="GridCell.Tab.0.center/0.0.1500.960/-2560.0.2560.1400@-2560.0.2560.1400" timestamp="1581427042325" />
-    <state width="1458" height="235" key="GridCell.Tab.0.center/0.0.1500.960@0.0.1500.960" timestamp="1581705348961" />
-    <state width="1458" height="235" key="GridCell.Tab.0.left" timestamp="1581705348960">
+    <state width="1458" height="235" key="GridCell.Tab.0.center/0.0.1500.960@0.0.1500.960" timestamp="1581709489613" />
+    <state width="1458" height="235" key="GridCell.Tab.0.left" timestamp="1581709489613">
       <screen x="0" y="0" width="1500" height="960" />
     </state>
     <state width="1236" height="398" key="GridCell.Tab.0.left/0.0.1500.960/-2560.0.2560.1400@-2560.0.2560.1400" timestamp="1581427042324" />
-    <state width="1458" height="235" key="GridCell.Tab.0.left/0.0.1500.960@0.0.1500.960" timestamp="1581705348960" />
-    <state width="1458" height="235" key="GridCell.Tab.0.right" timestamp="1581705348961">
+    <state width="1458" height="235" key="GridCell.Tab.0.left/0.0.1500.960@0.0.1500.960" timestamp="1581709489613" />
+    <state width="1458" height="235" key="GridCell.Tab.0.right" timestamp="1581709489613">
       <screen x="0" y="0" width="1500" height="960" />
     </state>
     <state width="1236" height="398" key="GridCell.Tab.0.right/0.0.1500.960/-2560.0.2560.1400@-2560.0.2560.1400" timestamp="1581427042325" />
-    <state width="1458" height="235" key="GridCell.Tab.0.right/0.0.1500.960@0.0.1500.960" timestamp="1581705348961" />
+    <state width="1458" height="235" key="GridCell.Tab.0.right/0.0.1500.960@0.0.1500.960" timestamp="1581709489613" />
     <state width="1458" height="294" key="GridCell.Tab.1.bottom" timestamp="1581605519830">
       <screen x="0" y="0" width="1500" height="960" />
     </state>
@@ -152,24 +150,24 @@
       <screen x="0" y="0" width="1500" height="960" />
     </state>
     <state x="502" y="107" key="RollbackChangesDialog/0.0.1500.960@0.0.1500.960" timestamp="1581703800844" />
-    <state x="464" y="113" key="SettingsEditor" timestamp="1581704346257">
+    <state x="464" y="113" key="SettingsEditor" timestamp="1581707263915">
       <screen x="0" y="0" width="1500" height="960" />
     </state>
     <state x="-1139" y="343" key="SettingsEditor/0.0.1500.960/-2560.0.2560.1400@-2560.0.2560.1400" timestamp="1581426466819" />
-    <state x="464" y="113" key="SettingsEditor/0.0.1500.960@0.0.1500.960" timestamp="1581704346257" />
-    <state x="948" y="454" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1581704255507">
+    <state x="464" y="113" key="SettingsEditor/0.0.1500.960@0.0.1500.960" timestamp="1581707263915" />
+    <state x="948" y="454" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1581706970406">
       <screen x="0" y="0" width="1500" height="960" />
     </state>
     <state x="-915" y="662" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.0.1500.960/-2560.0.2560.1400@-2560.0.2560.1400" timestamp="1581426228365" />
-    <state x="948" y="454" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.0.1500.960@0.0.1500.960" timestamp="1581704255507" />
+    <state x="948" y="454" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.0.1500.960@0.0.1500.960" timestamp="1581706970406" />
     <state x="556" y="393" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1581621127859">
       <screen x="0" y="0" width="1500" height="960" />
     </state>
     <state x="556" y="393" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1500.960@0.0.1500.960" timestamp="1581621127859" />
-    <state x="481" y="226" key="extract.method.dialog" timestamp="1581703455998">
+    <state x="481" y="226" key="extract.method.dialog" timestamp="1581706209130">
       <screen x="0" y="0" width="1500" height="960" />
     </state>
-    <state x="481" y="226" key="extract.method.dialog/0.0.1500.960@0.0.1500.960" timestamp="1581703455998" />
+    <state x="481" y="226" key="extract.method.dialog/0.0.1500.960@0.0.1500.960" timestamp="1581706209130" />
     <state x="493" y="92" key="refactoring.ChangeSignatureDialog" timestamp="1581624393221">
       <screen x="0" y="0" width="1500" height="960" />
     </state>

@@ -1,6 +1,9 @@
 package org.polypheny.db;
 
 
+import java.io.Serializable;
+
+
 /**
  * Base class for a CatalogEntry
  */
@@ -18,6 +21,7 @@ public abstract class CatalogEntry {
         return name;
     }
 
-
-    ;
+    public byte[] getBytes() {
+        return name.getBytes();
+    }
 }

@@ -14,15 +14,25 @@ public class KeyValueStoresTest {
 
     public static void main( String[] args ) {
 
+        //useMapDb();
+        useRocksDb();
+
+    }
+
+    private static void useRocksDb() {
+        RocksDbCatalog catalog = new RocksDbCatalog();
+
+
+    }
+
+    private static void useMapDb() {
         MapDbCatalog catalog = new MapDbCatalog();
 
         long startTime = System.nanoTime();
         for(int i = 0; i < 1000; i++){
             fillCatalog( catalog );
         }
-
         long endTime = System.nanoTime();
-
         long duration = (endTime - startTime);
         System.out.println( duration );
     }
