@@ -22,7 +22,10 @@ public class KeyValueStoresTest {
     private static void useRocksDb() {
         RocksDbCatalog catalog = new RocksDbCatalog();
 
+        catalog.addSchema( new SchemaEntry( "test" ) );
+        System.out.println( "test" );
 
+        catalog.close();
     }
 
     private static void useMapDb() {

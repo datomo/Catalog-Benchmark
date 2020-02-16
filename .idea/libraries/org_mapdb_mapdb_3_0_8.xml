@@ -6,9 +6,9 @@
       <root url="jar://$MAVEN_REPOSITORY$/org/jetbrains/kotlin/kotlin-stdlib/1.2.71/kotlin-stdlib-1.2.71.jar!/" />
       <root url="jar://$MAVEN_REPOSITORY$/org/jetbrains/kotlin/kotlin-stdlib-common/1.2.71/kotlin-stdlib-common-1.2.71.jar!/" />
       <root url="jar://$MAVEN_REPOSITORY$/org/jetbrains/annotations/13.0/annotations-13.0.jar!/" />
-      <root url="jar://$MAVEN_REPOSITORY$/org/eclipse/collections/eclipse-collections-api/10.2.0.M1/eclipse-collections-api-10.2.0.M1.jar!/" />
-      <root url="jar://$MAVEN_REPOSITORY$/org/eclipse/collections/eclipse-collections/10.2.0.M1/eclipse-collections-10.2.0.M1.jar!/" />
-      <root url="jar://$MAVEN_REPOSITORY$/org/eclipse/collections/eclipse-collections-forkjoin/10.2.0.M1/eclipse-collections-forkjoin-10.2.0.M1.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/eclipse/collections/eclipse-collections-api/10.2.0/eclipse-collections-api-10.2.0.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/eclipse/collections/eclipse-collections/10.2.0/eclipse-collections-10.2.0.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/eclipse/collections/eclipse-collections-forkjoin/10.2.0/eclipse-collections-forkjoin-10.2.0.jar!/" />
       <root url="jar://$MAVEN_REPOSITORY$/com/google/guava/guava/28.2-jre/guava-28.2-jre.jar!/" />
       <root url="jar://$MAVEN_REPOSITORY$/com/google/guava/failureaccess/1.0.1/failureaccess-1.0.1.jar!/" />
       <root url="jar://$MAVEN_REPOSITORY$/com/google/guava/listenablefuture/9999.0-empty-to-avoid-conflict-with-guava/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar!/" />
