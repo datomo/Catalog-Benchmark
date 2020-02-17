@@ -1,0 +1,91 @@
+2020/02/17-23:41:19.191469 7b4 RocksDB version: 6.5.3
+2020/02/17-23:41:19.191544 7b4 Git sha rocksdb_build_git_sha:@d7766387a8ed4cd8e9cddd5b3b3133cda0b23ba4@
+2020/02/17-23:41:19.191559 7b4 Compile date Jan 21 2020
+2020/02/17-23:41:19.191573 7b4 DB SUMMARY
+2020/02/17-23:41:19.191661 7b4 SST files in test dir, Total Num: 0, files: 
+2020/02/17-23:41:19.191676 7b4 Write Ahead Log file in test: 
+2020/02/17-23:41:19.191688 7b4                         Options.error_if_exists: 0
+2020/02/17-23:41:19.191702 7b4                       Options.create_if_missing: 0
+2020/02/17-23:41:19.191713 7b4                         Options.paranoid_checks: 1
+2020/02/17-23:41:19.191724 7b4                                     Options.env: 0000000000949A90
+2020/02/17-23:41:19.191735 7b4                                Options.info_log: 00000000009BB890
+2020/02/17-23:41:19.191837 7b4                Options.max_file_opening_threads: 16
+2020/02/17-23:41:19.191843 7b4                              Options.statistics: 0000000000000000
+2020/02/17-23:41:19.191847 7b4                               Options.use_fsync: 0
+2020/02/17-23:41:19.191851 7b4                       Options.max_log_file_size: 0
+2020/02/17-23:41:19.191855 7b4                  Options.max_manifest_file_size: 1073741824
+2020/02/17-23:41:19.191859 7b4                   Options.log_file_time_to_roll: 0
+2020/02/17-23:41:19.191863 7b4                       Options.keep_log_file_num: 1000
+2020/02/17-23:41:19.191867 7b4                    Options.recycle_log_file_num: 0
+2020/02/17-23:41:19.191871 7b4                         Options.allow_fallocate: 1
+2020/02/17-23:41:19.191875 7b4                        Options.allow_mmap_reads: 0
+2020/02/17-23:41:19.191878 7b4                       Options.allow_mmap_writes: 0
+2020/02/17-23:41:19.191882 7b4                        Options.use_direct_reads: 0
+2020/02/17-23:41:19.191886 7b4                        Options.use_direct_io_for_flush_and_compaction: 0
+2020/02/17-23:41:19.191890 7b4          Options.create_missing_column_families: 1
+2020/02/17-23:41:19.191894 7b4                              Options.db_log_dir: 
+2020/02/17-23:41:19.191898 7b4                                 Options.wal_dir: test
+2020/02/17-23:41:19.191902 7b4                Options.table_cache_numshardbits: 6
+2020/02/17-23:41:19.191906 7b4                      Options.max_subcompactions: 1
+2020/02/17-23:41:19.191910 7b4                  Options.max_background_flushes: -1
+2020/02/17-23:41:19.191916 7b4                         Options.WAL_ttl_seconds: 0
+2020/02/17-23:41:19.191920 7b4                       Options.WAL_size_limit_MB: 0
+2020/02/17-23:41:19.191924 7b4                        Options.max_write_batch_group_size_bytes: 1048576
+2020/02/17-23:41:19.191928 7b4             Options.manifest_preallocation_size: 4194304
+2020/02/17-23:41:19.191932 7b4                     Options.is_fd_close_on_exec: 1
+2020/02/17-23:41:19.191936 7b4                   Options.advise_random_on_open: 1
+2020/02/17-23:41:19.191940 7b4                    Options.db_write_buffer_size: 0
+2020/02/17-23:41:19.191944 7b4                    Options.write_buffer_manager: 00000000009BEAD0
+2020/02/17-23:41:19.191948 7b4         Options.access_hint_on_compaction_start: 1
+2020/02/17-23:41:19.191952 7b4  Options.new_table_reader_for_compaction_inputs: 0
+2020/02/17-23:41:19.191955 7b4           Options.random_access_max_buffer_size: 1048576
+2020/02/17-23:41:19.191959 7b4                      Options.use_adaptive_mutex: 0
+2020/02/17-23:41:19.191963 7b4                            Options.rate_limiter: 0000000000000000
+2020/02/17-23:41:19.191968 7b4     Options.sst_file_manager.rate_bytes_per_sec: 0
+2020/02/17-23:41:19.191972 7b4                       Options.wal_recovery_mode: 2
+2020/02/17-23:41:19.191976 7b4                  Options.enable_thread_tracking: 0
+2020/02/17-23:41:19.191980 7b4                  Options.enable_pipelined_write: 0
+2020/02/17-23:41:19.191984 7b4                  Options.unordered_write: 0
+2020/02/17-23:41:19.191987 7b4         Options.allow_concurrent_memtable_write: 1
+2020/02/17-23:41:19.191991 7b4      Options.enable_write_thread_adaptive_yield: 1
+2020/02/17-23:41:19.192014 7b4             Options.write_thread_max_yield_usec: 100
+2020/02/17-23:41:19.192019 7b4            Options.write_thread_slow_yield_usec: 3
+2020/02/17-23:41:19.192023 7b4                               Options.row_cache: None
+2020/02/17-23:41:19.192027 7b4                              Options.wal_filter: None
+2020/02/17-23:41:19.192031 7b4             Options.avoid_flush_during_recovery: 0
+2020/02/17-23:41:19.192035 7b4             Options.allow_ingest_behind: 0
+2020/02/17-23:41:19.192039 7b4             Options.preserve_deletes: 0
+2020/02/17-23:41:19.192043 7b4             Options.two_write_queues: 0
+2020/02/17-23:41:19.192047 7b4             Options.manual_wal_flush: 0
+2020/02/17-23:41:19.192050 7b4             Options.atomic_flush: 0
+2020/02/17-23:41:19.192054 7b4             Options.avoid_unnecessary_blocking_io: 0
+2020/02/17-23:41:19.192058 7b4                 Options.persist_stats_to_disk: 0
+2020/02/17-23:41:19.192062 7b4                 Options.write_dbid_to_manifest: 0
+2020/02/17-23:41:19.192066 7b4                 Options.log_readahead_size: 0
+2020/02/17-23:41:19.192070 7b4             Options.max_background_jobs: 2
+2020/02/17-23:41:19.192074 7b4             Options.max_background_compactions: -1
+2020/02/17-23:41:19.192078 7b4             Options.avoid_flush_during_shutdown: 0
+2020/02/17-23:41:19.192082 7b4           Options.writable_file_max_buffer_size: 1048576
+2020/02/17-23:41:19.192086 7b4             Options.delayed_write_rate : 16777216
+2020/02/17-23:41:19.192090 7b4             Options.max_total_wal_size: 0
+2020/02/17-23:41:19.192094 7b4             Options.delete_obsolete_files_period_micros: 21600000000
+2020/02/17-23:41:19.192098 7b4                   Options.stats_dump_period_sec: 600
+2020/02/17-23:41:19.192102 7b4                 Options.stats_persist_period_sec: 600
+2020/02/17-23:41:19.192106 7b4                 Options.stats_history_buffer_size: 1048576
+2020/02/17-23:41:19.192110 7b4                          Options.max_open_files: -1
+2020/02/17-23:41:19.192114 7b4                          Options.bytes_per_sync: 0
+2020/02/17-23:41:19.192118 7b4                      Options.wal_bytes_per_sync: 0
+2020/02/17-23:41:19.192122 7b4                   Options.strict_bytes_per_sync: 0
+2020/02/17-23:41:19.192125 7b4       Options.compaction_readahead_size: 0
+2020/02/17-23:41:19.192129 7b4 Compression algorithms supported:
+2020/02/17-23:41:19.192139 7b4 	kZSTD supported: 1
+2020/02/17-23:41:19.192143 7b4 	kSnappyCompression supported: 1
+2020/02/17-23:41:19.192147 7b4 	kBZip2Compression supported: 0
+2020/02/17-23:41:19.192151 7b4 	kZlibCompression supported: 1
+2020/02/17-23:41:19.192154 7b4 	kLZ4Compression supported: 1
+2020/02/17-23:41:19.192158 7b4 	kXpressCompression supported: 0
+2020/02/17-23:41:19.192162 7b4 	kLZ4HCCompression supported: 1
+2020/02/17-23:41:19.192166 7b4 	kZSTDNotFinalCompression supported: 1
+2020/02/17-23:41:19.192176 7b4 Fast CRC32 supported: Supported on x86
+2020/02/17-23:41:19.192566 7b4 [db_impl\db_impl.cc:396] Shutdown: canceling all background work
+2020/02/17-23:41:19.192631 7b4 [db_impl\db_impl.cc:577] Shutdown complete

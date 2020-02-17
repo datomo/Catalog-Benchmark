@@ -13,6 +13,7 @@ import org.rocksdb.DBOptions;
 import org.rocksdb.Options;
 import org.rocksdb.RocksDB;
 import org.rocksdb.RocksDBException;
+import org.rocksdb.WriteOptions;
 
 
 /**
@@ -27,7 +28,7 @@ public class RocksDbCatalog {
     private ColumnFamilyHandle tableChildren;
     private ColumnFamilyHandle column;
 
-    RocksDB db;
+    private RocksDB db;
 
 
     static {
@@ -38,18 +39,13 @@ public class RocksDbCatalog {
     public RocksDbCatalog() {
         final String db_path = "rockdb";
 
-        System.out.println( "RocksDBColumnFamilySample" );
-
-
         // open DB with two column families
         final List<ColumnFamilyDescriptor> columnFamilyDescriptors = new ArrayList<>();
-
 
         final List<ColumnFamilyHandle> columnFamilyHandles = new ArrayList<>();
 
         columnFamilyDescriptors.add( new ColumnFamilyDescriptor( RocksDB.DEFAULT_COLUMN_FAMILY, new ColumnFamilyOptions() ) );
 
-        columnFamilyDescriptors.add( new ColumnFamilyDescriptor( "new_cf".getBytes(), new ColumnFamilyOptions() ) );
         columnFamilyDescriptors.add( new ColumnFamilyDescriptor( "schema".getBytes(), new ColumnFamilyOptions() ) );
         columnFamilyDescriptors.add( new ColumnFamilyDescriptor( "schemaChildren".getBytes(), new ColumnFamilyOptions() ) );
         columnFamilyDescriptors.add( new ColumnFamilyDescriptor( "tables".getBytes(), new ColumnFamilyOptions() ) );
@@ -57,29 +53,27 @@ public class RocksDbCatalog {
         columnFamilyDescriptors.add( new ColumnFamilyDescriptor( "column".getBytes(), new ColumnFamilyOptions() ) );
 
         this.columnFamilyHandles = columnFamilyHandles;
-        try ( final DBOptions options = new DBOptions();
-                final RocksDB db = RocksDB.open( options, db_path, columnFamilyDescriptors, columnFamilyHandles ) ) {
-
-            // have to open default column family
-            // open the new one, too
-
-            //columnFamilyDescriptors.add( new ColumnFamilyDescriptor( "new_cf".getBytes(), new ColumnFamilyOptions() ) );
-
-
-
-            //try {
-            // put and get from non-default column family
-            // db.put( columnFamilyHandles.get( 0 ), new WriteOptions(), "key".getBytes(), "value".getBytes() );
-
-            this.schema = columnFamilyHandles.get( 0 );
-            this.schemaChildren = columnFamilyHandles.get( 1 );
-            this.table = columnFamilyHandles.get( 2 );
-            this.tableChildren = columnFamilyHandles.get( 3 );
-            this.column = columnFamilyHandles.get( 4 );
-
+        final DBOptions options = new DBOptions();
+        options.setCreateIfMissing( true );
+        options.setCreateMissingColumnFamilies( true );
+        try {
+            open( db_path, columnFamilyDescriptors, columnFamilyHandles, options );
         } catch ( RocksDBException e ) {
             e.printStackTrace();
         }
+    }
+
+
+    private void open( String db_path, List<ColumnFamilyDescriptor> columnFamilyDescriptors, List<ColumnFamilyHandle> columnFamilyHandles, DBOptions options ) throws RocksDBException {
+        this.db = RocksDB.open( options, db_path, columnFamilyDescriptors, columnFamilyHandles );
+
+        this.schema = columnFamilyHandles.get( 0 );
+        this.schemaChildren = columnFamilyHandles.get( 1 );
+        this.table = columnFamilyHandles.get( 2 );
+        this.tableChildren = columnFamilyHandles.get( 3 );
+        this.column = columnFamilyHandles.get( 4 );
+        System.out.println( "came here" );
+
     }
 
 
@@ -93,7 +87,6 @@ public class RocksDbCatalog {
 
     public void addSchema( SchemaEntry schema ) {
         try {
-            db.put( this.schemaChildren, schema.getBytes(), schema.getBytes() );
             db.put( this.schema, schema.getBytes(), schema.getBytes() );
         } catch ( RocksDBException e ) {
             e.printStackTrace();
@@ -113,8 +106,7 @@ public class RocksDbCatalog {
 
     public void addTable( String schema, TableEntry table ) {
 
-            // List<String> children = db.get( this.schemaChildren, schema.getBytes() );
-
+        // List<String> children = db.get( this.schemaChildren, schema.getBytes() );
 
     }
 
