@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.stream.events.StartDocument;
+import org.jetbrains.annotations.NotNull;
 import org.rocksdb.ColumnFamilyDescriptor;
 import org.rocksdb.ColumnFamilyHandle;
 import org.rocksdb.ColumnFamilyOptions;
@@ -169,12 +171,12 @@ public class RocksDbCatalog implements DbCatalog {
 
     @Override
     public List<String> getSchemaNames() {
-        RocksIterator iter = this.db.newIterator( this.schemas );
-        iter.seekToFirst();
+        RocksIterator iterator = this.db.newIterator( this.schemas );
+        iterator.seekToFirst();
         List<String> names = new ArrayList<>();
-        while ( iter.isValid() ) {
-            names.add( new String( iter.key(), StandardCharsets.UTF_8 ) );
-            iter.next();
+        while ( iterator.isValid() ) {
+            names.add( new String( iterator.key(), StandardCharsets.UTF_8 ) );
+            iterator.next();
         }
         return names;
     }
@@ -182,31 +184,67 @@ public class RocksDbCatalog implements DbCatalog {
 
     @Override
     public List<String> getTableNames() {
-        return null;
+        RocksIterator iterator = this.db.newIterator( this.tables );
+        iterator.seekToFirst();
+        List<String> names = new ArrayList<>();
+        while ( iterator.isValid() ) {
+            names.add( new String( iterator.key(), StandardCharsets.UTF_8 ) );
+            iterator.next();
+        }
+        return names;
     }
 
 
     @Override
     public List<String> getColumnNames() {
-        return null;
+        RocksIterator iterator = this.db.newIterator( this.columns );
+        iterator.seekToFirst();
+        List<String> names = new ArrayList<>();
+        while ( iterator.isValid() ) {
+            names.add( new String( iterator.key(), StandardCharsets.UTF_8 ) );
+            iterator.next();
+        }
+        return names;
     }
 
 
     @Override
     public List<SchemaEntry> getSchemas() {
-        return null;
+        RocksIterator iterator = this.db.newIterator( this.schemas );
+        iterator.seekToFirst();
+        List<SchemaEntry> schemas = new ArrayList<>();
+        while ( iterator.isValid() ) {
+            schemas.add( CheapSerializer.SchemaSerializer.deserialize( iterator.value() ) );
+            iterator.next();
+        }
+        return schemas;
     }
+
 
 
     @Override
     public List<TableEntry> getTables() {
-        return null;
+        RocksIterator iterator = this.db.newIterator( this.tables);
+        iterator.seekToFirst();
+        List<TableEntry> tables = new ArrayList<>();
+        while ( iterator.isValid() ) {
+            tables.add( CheapSerializer.TableSerializer.deserialize( iterator.value() ) );
+            iterator.next();
+        }
+        return tables;
     }
 
 
     @Override
     public List<ColumnEntry> getColumns() {
-        return null;
+        RocksIterator iterator = this.db.newIterator( this.columns);
+        iterator.seekToFirst();
+        List<ColumnEntry> columns = new ArrayList<>();
+        while ( iterator.isValid() ) {
+            columns.add( CheapSerializer.ColumnSerializer.deserialize( iterator.value() ) );
+            iterator.next();
+        }
+        return columns;
     }
 
 

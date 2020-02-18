@@ -1,25 +1,34 @@
 package org.polypheny.db;
 
 
+import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
 
 
 public class KeyValueStoresTest {
 
-    static int iter = 1;
+    static int iter = 1000000;
 
 
     public static void main( String[] args ) {
-        useCatalog( new MapDbCatalog() );
-        useCatalog( new RocksDbCatalog() );
+        timeCatalog( new MapDbCatalog(), KeyValueStoresTest::fillTest );
+        timeCatalog( new RocksDbCatalog(), KeyValueStoresTest::fillTest );
+        DbCatalog mapDB = new MapDbCatalog();
+        DbCatalog rocksDB = new RocksDbCatalog();
+
+        fill( mapDB );
+        fill( rocksDB );
+
+        timeCatalog( mapDB, DbCatalog::getColumns );
+        timeCatalog( rocksDB, DbCatalog::getColumns );
     }
 
 
-    private static void useCatalog( DbCatalog catalog ) {
+    private static void timeCatalog( DbCatalog catalog, Consumer<DbCatalog> func ) {
 
         long startTime = System.nanoTime();
         for ( int i = 0; i < iter; i++ ) {
-            fillCatalog( catalog );
+            func.accept( catalog );
         }
         catalog.close();
         long endTime = System.nanoTime();
@@ -51,18 +60,32 @@ public class KeyValueStoresTest {
     }
 
 
-    private static void fillCatalog( DbCatalog catalog ) {
+    private static void fillTest( DbCatalog catalog ) {
 
         catalog.addSchema( new SchemaEntry( "test" ) );
-        /*catalog.addTable( new TableEntry( "test", "testTable" ) );
+        catalog.addTable( new TableEntry( "test", "testTable" ) );
         catalog.addColumn( new ColumnEntry( "test", "testTable", "testColumn" ) );
 
         catalog.getColumn( "test", "testTable", "testColumn" ).getName();
         catalog.getTable( "test", "testTable" ).getName();
-        catalog.getSchema( "test" ).getName();*/
+        catalog.getSchema( "test" ).getName();
 
-        catalog.getSchemaNames().forEach( System.out::println );
+        catalog.getSchemaNames();
+        catalog.getSchemaNames();
+        catalog.getSchemas();
 
+    }
+
+
+    private static void fill( DbCatalog catalog ) {
+        catalog.addSchema( new SchemaEntry( "test" ) );
+        catalog.addSchema( new SchemaEntry( "test2" ) );
+        catalog.addTable( new TableEntry( "test", "testTable" ) );
+        catalog.addTable( new TableEntry( "test", "testTable1" ) );
+        catalog.addTable( new TableEntry( "test", "testTable3" ) );
+        catalog.addColumn( new ColumnEntry( "test", "testTable", "testColumn" ) );
+        catalog.addColumn( new ColumnEntry( "test", "testTable", "testColumn2" ) );
+        catalog.addColumn( new ColumnEntry( "test", "testTable", "testColumn3" ) );
     }
 
 
