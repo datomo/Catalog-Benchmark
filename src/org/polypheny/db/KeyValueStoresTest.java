@@ -10,11 +10,12 @@ import org.polypheny.db.MapDbCatalog.TableExistsException;
 
 
 public class KeyValueStoresTest {
+    static int iter = 100000;
 
 
     public static void main( String[] args ) {
-        //MapDbCatalog catalog = new MapDbCatalog();
-        RocksDbCatalog catalog = new RocksDbCatalog();
+        MapDbCatalog catalog = new MapDbCatalog();
+        // RocksDbCatalog catalog = new RocksDbCatalog();
 
         useCatalog( catalog );
 
@@ -25,7 +26,7 @@ public class KeyValueStoresTest {
     private static void useCatalog( DbCatalog catalog ) {
 
         long startTime = System.nanoTime();
-        for ( int i = 0; i < 1000; i++ ) {
+        for ( int i = 0; i < iter; i++ ) {
             fillCatalog( catalog );
         }
         long endTime = System.nanoTime();

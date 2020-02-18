@@ -2,26 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7aaf8e33-1e8c-44fa-a459-726a97b9da9b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/polypheny/db/CatalogEntry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/polypheny/db/CatalogEntry.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/polypheny/db/ColumnEntry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/polypheny/db/ColumnEntry.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/polypheny/db/DbSerialize.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/polypheny/db/DbSerialize.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/org/polypheny/db/KeyValueStoresTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/polypheny/db/KeyValueStoresTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/polypheny/db/MapDbCatalog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/polypheny/db/MapDbCatalog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/polypheny/db/RocksDBColumnFamilySample.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/org/polypheny/db/RocksDbCatalog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/polypheny/db/RocksDbCatalog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/polypheny/db/SchemaEntry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/polypheny/db/SchemaEntry.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/polypheny/db/TableEntry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/polypheny/db/TableEntry.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/000003.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/CURRENT" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/IDENTITY" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/LOCK" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/LOG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/LOG.old.1581979279190422" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/LOG.old.1581979425680220" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/MANIFEST-000004" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/OPTIONS-000008" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/OPTIONS-000010" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,7 +97,7 @@
       <workItem from="1581974316118" duration="6976000" />
       <workItem from="1582013431665" duration="747000" />
       <workItem from="1582014916518" duration="3244000" />
-      <workItem from="1582018207233" duration="6728000" />
+      <workItem from="1582018207233" duration="11267000" />
     </task>
     <servers />
   </component>
@@ -145,34 +129,34 @@
     <state x="726" y="248" key="FileChooserDialogImpl/0.0.1200.760@0.0.1200.760" timestamp="1582015382612" />
     <state x="-860" y="456" key="FileChooserDialogImpl/0.0.1500.960/-2560.0.2560.1400@-2560.0.2560.1400" timestamp="1581427040450" />
     <state x="908" y="313" key="FileChooserDialogImpl/0.0.1500.960@0.0.1500.960" timestamp="1581704021288" />
-    <state width="1157" height="190" key="GridCell.Tab.0.bottom" timestamp="1582024974515">
+    <state width="1157" height="190" key="GridCell.Tab.0.bottom" timestamp="1582032918800">
       <screen x="0" y="0" width="1200" height="760" />
     </state>
-    <state width="1157" height="190" key="GridCell.Tab.0.bottom/0.0.1200.760@0.0.1200.760" timestamp="1582024974515" />
+    <state width="1157" height="190" key="GridCell.Tab.0.bottom/0.0.1200.760@0.0.1200.760" timestamp="1582032918800" />
     <state width="1236" height="398" key="GridCell.Tab.0.bottom/0.0.1500.960/-2560.0.2560.1400@-2560.0.2560.1400" timestamp="1581427042325" />
     <state width="1458" height="235" key="GridCell.Tab.0.bottom/0.0.1500.960@0.0.1500.960" timestamp="1581709489613" />
     <state width="1876" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040/3840.0.1920.1040@0.0.1920.1040" timestamp="1581975191556" />
     <state width="1876" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040/3840.0.1920.1040@3840.0.1920.1040" timestamp="1581981800441" />
-    <state width="1157" height="190" key="GridCell.Tab.0.center" timestamp="1582024974515">
+    <state width="1157" height="190" key="GridCell.Tab.0.center" timestamp="1582032918800">
       <screen x="0" y="0" width="1200" height="760" />
     </state>
-    <state width="1157" height="190" key="GridCell.Tab.0.center/0.0.1200.760@0.0.1200.760" timestamp="1582024974515" />
+    <state width="1157" height="190" key="GridCell.Tab.0.center/0.0.1200.760@0.0.1200.760" timestamp="1582032918800" />
     <state width="1236" height="398" key="GridCell.Tab.0.center/0.0.1500.960/-2560.0.2560.1400@-2560.0.2560.1400" timestamp="1581427042325" />
     <state width="1458" height="235" key="GridCell.Tab.0.center/0.0.1500.960@0.0.1500.960" timestamp="1581709489613" />
     <state width="1876" height="282" key="GridCell.Tab.0.center/0.0.1920.1040/3840.0.1920.1040@0.0.1920.1040" timestamp="1581975191556" />
     <state width="1876" height="282" key="GridCell.Tab.0.center/0.0.1920.1040/3840.0.1920.1040@3840.0.1920.1040" timestamp="1581981800441" />
-    <state width="1157" height="190" key="GridCell.Tab.0.left" timestamp="1582024974515">
+    <state width="1157" height="190" key="GridCell.Tab.0.left" timestamp="1582032918800">
       <screen x="0" y="0" width="1200" height="760" />
     </state>
-    <state width="1157" height="190" key="GridCell.Tab.0.left/0.0.1200.760@0.0.1200.760" timestamp="1582024974515" />
+    <state width="1157" height="190" key="GridCell.Tab.0.left/0.0.1200.760@0.0.1200.760" timestamp="1582032918800" />
     <state width="1236" height="398" key="GridCell.Tab.0.left/0.0.1500.960/-2560.0.2560.1400@-2560.0.2560.1400" timestamp="1581427042324" />
     <state width="1458" height="235" key="GridCell.Tab.0.left/0.0.1500.960@0.0.1500.960" timestamp="1581709489613" />
     <state width="1876" height="282" key="GridCell.Tab.0.left/0.0.1920.1040/3840.0.1920.1040@0.0.1920.1040" timestamp="1581975191556" />
     <state width="1876" height="282" key="GridCell.Tab.0.left/0.0.1920.1040/3840.0.1920.1040@3840.0.1920.1040" timestamp="1581981800440" />
-    <state width="1157" height="190" key="GridCell.Tab.0.right" timestamp="1582024974515">
+    <state width="1157" height="190" key="GridCell.Tab.0.right" timestamp="1582032918800">
       <screen x="0" y="0" width="1200" height="760" />
     </state>
-    <state width="1157" height="190" key="GridCell.Tab.0.right/0.0.1200.760@0.0.1200.760" timestamp="1582024974515" />
+    <state width="1157" height="190" key="GridCell.Tab.0.right/0.0.1200.760@0.0.1200.760" timestamp="1582032918800" />
     <state width="1236" height="398" key="GridCell.Tab.0.right/0.0.1500.960/-2560.0.2560.1400@-2560.0.2560.1400" timestamp="1581427042325" />
     <state width="1458" height="235" key="GridCell.Tab.0.right/0.0.1500.960@0.0.1500.960" timestamp="1581709489613" />
     <state width="1876" height="282" key="GridCell.Tab.0.right/0.0.1920.1040/3840.0.1920.1040@0.0.1920.1040" timestamp="1581975191556" />
@@ -259,7 +243,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/org/polypheny/db/RocksDbCatalog.java</url>
-          <line>157</line>
+          <line>158</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
       </breakpoints>
