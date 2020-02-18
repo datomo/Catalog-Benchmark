@@ -72,7 +72,7 @@ public class MapDbCatalog implements DbCatalog {
         tables.add( table.getName() );
         this.schemaChildren.put( schema, tables );
         this.tableChildren.put( schema + "." + table.getName(), ImmutableList.of() );
-        this.tables.put( schema + "." + table, table );
+        this.tables.put( schema + "." + table.getName(), table );
     }
 
 

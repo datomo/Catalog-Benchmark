@@ -1,16 +1,11 @@
 package org.polypheny.db;
 
 
-import com.sun.istack.internal.NotNull;
-import java.io.DataInput;
-import java.io.DataInputStream;
-import java.io.DataOutput;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import org.mapdb.DataInput2;
-import org.mapdb.DataInput2.ByteArray;
 import org.mapdb.DataOutput2;
 
 
@@ -33,7 +28,8 @@ public class CheapSerializer {
         public static SchemaEntry deserialize( byte[] bytes ) {
             DataInput2 in = new DataInput2.ByteArray( bytes );
             try {
-                return new SchemaEntry( in.readUTF() );
+                String name = in.readUTF();
+                return new SchemaEntry( name );
             } catch ( IOException e ) {
                 e.printStackTrace();
             }
@@ -47,8 +43,8 @@ public class CheapSerializer {
         public static byte[] serialize( TableEntry entry ) {
             DataOutput2 out = new DataOutput2();
             try {
-                out.writeUTF( entry.getName() );
                 out.writeUTF( entry.getSchema() );
+                out.writeUTF( entry.getName() );
             } catch ( IOException e ) {
                 e.printStackTrace();
             }
@@ -73,9 +69,10 @@ public class CheapSerializer {
         public static byte[] serialize( ColumnEntry entry ) {
             DataOutput2 out = new DataOutput2();
             try {
-                out.writeUTF( entry.getName() );
-                out.writeUTF( entry.getTable() );
                 out.writeUTF( entry.getSchema() );
+                out.writeUTF( entry.getTable() );
+                out.writeUTF( entry.getName() );
+
             } catch ( IOException e ) {
                 e.printStackTrace();
             }
@@ -99,11 +96,10 @@ public class CheapSerializer {
 
         public static byte[] serialize( List<String> list ) throws IOException {
             DataOutput2 out = new DataOutput2();
-
+            out.writeInt( list.size() );
             for ( String e : list ) {
                 out.writeUTF( e );
             }
-            out.writeInt( list.size() );
 
             return out.copyBytes();
 

@@ -89,7 +89,7 @@ public class RocksDbCatalog implements DbCatalog {
         try {
             byte[] bytes = CheapSerializer.StringListSerializer.serialize( new ArrayList<>() );
             db.put( this.schemaChildren, CheapSerializer.SchemaSerializer.serialize( schema ), bytes );
-            db.put( this.schema, schema.getName().getBytes(), schema.getBytes() );
+            db.put( this.schema, schema.getName().getBytes(), CheapSerializer.SchemaSerializer.serialize( schema ) );
         } catch ( RocksDBException | IOException e ) {
             e.printStackTrace();
         }
@@ -105,7 +105,7 @@ public class RocksDbCatalog implements DbCatalog {
             List<String> tables = new ArrayList<>( list );
             tables.add( table.getName() );
             db.put( this.schemaChildren, schema.getBytes(), CheapSerializer.StringListSerializer.serialize( tables ) );
-            db.put( this.table, (schema + "." + table.getName()).getBytes(), table.getBytes() );
+            db.put( this.table, (schema + "." + table.getName()).getBytes(), CheapSerializer.TableSerializer.serialize( table ) );
             db.put( this.tableChildren, (schema + "." + table.getName()).getBytes(), CheapSerializer.StringListSerializer.serialize( new ArrayList<>() ) );
         } catch ( RocksDBException | IOException e ) {
             e.printStackTrace();
@@ -144,7 +144,8 @@ public class RocksDbCatalog implements DbCatalog {
     @Override
     public TableEntry getTable( String schema, String table ) {
         try {
-            return CheapSerializer.TableSerializer.deserialize( db.get( this.table, (this.schema + "." + this.table).getBytes() ) );
+            byte[] bytes = db.get( this.table, (schema + "." + table).getBytes() );
+            return CheapSerializer.TableSerializer.deserialize( bytes );
         } catch ( RocksDBException e ) {
             e.printStackTrace();
         }
