@@ -18,7 +18,7 @@ import org.polypheny.db.DbSerialize.TableSerializer;
  * Database catalog which uses the schemaChildren and tableChildren maps as an index and the specific columns as information holder
  * this should help to reduce access of specific columns and table-/schema-specific requests
  */
-public class MapDbCatalog {
+public class MapDbCatalog implements DbCatalog {
 
     private final DB db;
 
@@ -49,43 +49,64 @@ public class MapDbCatalog {
                 .create();
 
         this.schemaChildren = db
-                .hashMap( "schemaChildren", Serializer.STRING, new ListSerializer<String>( Serializer.STRING ) )
+                .hashMap( "schemaChildren", Serializer.STRING, new ListSerializer<>( Serializer.STRING ) )
                 .create();
 
         this.tableChildren = db
-                .hashMap( "tableChildren", Serializer.STRING, new ListSerializer<String>( Serializer.STRING ) )
+                .hashMap( "tableChildren", Serializer.STRING, new ListSerializer<>( Serializer.STRING ) )
                 .create();
     }
 
 
-    public void addSchema( String name ) throws TableExistsException {
-        /*if ( this.schemaChildren.get( name ) != null ) {
-            throw new TableExistsException();
-        }*/
-        this.schemaChildren.put( name, ImmutableList.of() );
-        this.schemas.put( name, new SchemaEntry( name ) );
+    @Override
+    public void addSchema( SchemaEntry schema ) {
+        this.schemaChildren.put( schema.getName(), ImmutableList.of() );
+        this.schemas.put( schema.getName(), schema );
     }
 
 
-    public void addTable( String schema, String table ) {
+    @Override
+    public void addTable( TableEntry table ) {
+        String schema = table.getSchema();
         List<String> tables = new ArrayList<>( this.schemaChildren.get( schema ) );
-        tables.add( table );
+        tables.add( table.getName() );
         this.schemaChildren.put( schema, tables );
-        this.tableChildren.put( schema + "." + table, ImmutableList.of() );
-        this.tables.put( schema + "." + table, new TableEntry( table ) );
+        this.tableChildren.put( schema + "." + table.getName(), ImmutableList.of() );
+        this.tables.put( schema + "." + table, table );
     }
 
 
-    public void addColumn( String schema, String table, String column ) {
+    @Override
+    public void addColumn( ColumnEntry column ) {
+        String schema = column.getSchema();
+        String table = column.getTable();
         List<String> columns = new ArrayList<>( this.tableChildren.get( schema + "." + table ) );
-        columns.add( column );
+        columns.add( column.getName() );
         this.tableChildren.put( schema + "." + table, columns );
-        this.columns.put( schema + "." + table + "." + column, new ColumnEntry( column ) );
+        this.columns.put( schema + "." + table + "." + column.getName(), column );
     }
 
 
+    @Override
+    public SchemaEntry getSchema( String schema ) {
+        return this.schemas.get( schema );
+    }
+
+
+    @Override
+    public TableEntry getTable( String schema, String table ) {
+        return this.tables.get( schema + "." + table );
+    }
+
+    @Override
     public ColumnEntry getColumn( String schema, String table, String column ) {
         return this.columns.get( schema + "." + table + "." + column );
+    }
+
+
+    @Override
+    public void close() {
+        this.db.close();
     }
 
 

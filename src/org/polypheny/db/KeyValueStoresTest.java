@@ -13,26 +13,19 @@ public class KeyValueStoresTest {
 
 
     public static void main( String[] args ) {
-
-        //useMapDb();
-        useRocksDb();
-
-    }
-
-    private static void useRocksDb() {
+        //MapDbCatalog catalog = new MapDbCatalog();
         RocksDbCatalog catalog = new RocksDbCatalog();
 
-        catalog.addSchema( new SchemaEntry( "test" ) );
-        System.out.println( "test" );
+        useCatalog( catalog );
 
         catalog.close();
     }
 
-    private static void useMapDb() {
-        MapDbCatalog catalog = new MapDbCatalog();
+
+    private static void useCatalog( DbCatalog catalog ) {
 
         long startTime = System.nanoTime();
-        for(int i = 0; i < 1000; i++){
+        for ( int i = 0; i < 1000; i++ ) {
             fillCatalog( catalog );
         }
         long endTime = System.nanoTime();
@@ -41,26 +34,13 @@ public class KeyValueStoresTest {
     }
 
 
-    private static void fillCatalog( MapDbCatalog catalog ) {
-        try {
-            catalog.addSchema( "test" );
-            catalog.addTable( "test", "testTable" );
-            catalog.addColumn( "test", "testTable", "testColumn" );
+    private static void fillCatalog( DbCatalog catalog ) {
 
-            catalog.getColumn( "test", "testTable", "testColumn" ).getName();
-        } catch ( TableExistsException e ) {
-            e.printStackTrace();
-        }
-    }
+        catalog.addSchema( new SchemaEntry( "test" ) );
+        catalog.addTable( new TableEntry( "test", "testTable" ) );
+        catalog.addColumn( new ColumnEntry( "test", "testTable", "testColumn" ) );
 
-
-    private static void makeSchemas( DB db ) {
-        ConcurrentMap<String, SchemaEntry> schemas = db.hashMap( "schemas" )
-                .keySerializer( Serializer.STRING )
-                .valueSerializer( new SchemaSerializer() )
-                .createOrOpen();
-        ImmutableList<TableEntry> tables = ImmutableList.of( new TableEntry( "name1" ), new TableEntry( "name2" ) );
-        schemas.put( "test", new SchemaEntry( "id" ) );
+        catalog.getColumn( "test", "testTable", "testColumn" ).getName();
 
     }
 

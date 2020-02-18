@@ -7,7 +7,7 @@ import java.io.Serializable;
 /**
  * Base class for a CatalogEntry
  */
-public abstract class CatalogEntry {
+public abstract class CatalogEntry implements Serializable {
 
     private final String name;
 
@@ -21,7 +21,8 @@ public abstract class CatalogEntry {
         return name;
     }
 
-    public byte[] getBytes() {
-        return name.getBytes();
-    }
+
+    abstract byte[] getBytes();
+
+
 }

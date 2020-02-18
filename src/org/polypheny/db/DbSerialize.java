@@ -83,14 +83,14 @@ public class DbSerialize {
 
         @Override
         public void serialize( @NotNull DataOutput2 dataOutput2, @NotNull TableEntry table ) throws IOException {
+            dataOutput2.writeUTF( table.getSchema() );
             dataOutput2.writeUTF( table.getName() );
         }
 
 
         @Override
         public TableEntry deserialize( @NotNull DataInput2 dataInput2, int i ) throws IOException {
-            String name = dataInput2.readUTF();
-            return new TableEntry( dataInput2.readUTF() );
+            return new TableEntry( dataInput2.readUTF(), dataInput2.readUTF() );
         }
     }
 
@@ -99,13 +99,15 @@ public class DbSerialize {
 
         @Override
         public void serialize( @NotNull DataOutput2 dataOutput2, @NotNull ColumnEntry column ) throws IOException {
+            dataOutput2.writeUTF( column.getSchema() );
+            dataOutput2.writeUTF( column.getTable() );
             dataOutput2.writeUTF( column.getName() );
         }
 
 
         @Override
         public ColumnEntry deserialize( @NotNull DataInput2 dataInput2, int i ) throws IOException {
-            return new ColumnEntry( dataInput2.readUTF() );
+            return new ColumnEntry( dataInput2.readUTF(), dataInput2.readUTF(), dataInput2.readUTF() );
         }
     }
 }
