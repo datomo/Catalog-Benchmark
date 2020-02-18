@@ -96,10 +96,11 @@ public class CheapSerializer {
 
         public static byte[] serialize( List<String> list ) throws IOException {
             DataOutput2 out = new DataOutput2();
-            out.writeInt( list.size() );
+
             for ( String e : list ) {
                 out.writeUTF( e );
             }
+            out.writeInt( list.size() );
 
             return out.copyBytes();
 

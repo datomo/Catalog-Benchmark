@@ -98,9 +98,46 @@ public class MapDbCatalog implements DbCatalog {
         return this.tables.get( schema + "." + table );
     }
 
+
     @Override
     public ColumnEntry getColumn( String schema, String table, String column ) {
         return this.columns.get( schema + "." + table + "." + column );
+    }
+
+
+    @Override
+    public List<String> getSchemaNames() {
+        return new ArrayList<>( this.schemaChildren.keySet() );
+    }
+
+
+    @Override
+    public List<String> getTableNames() {
+        return null;
+    }
+
+
+    @Override
+    public List<String> getColumnNames() {
+        return null;
+    }
+
+
+    @Override
+    public List<SchemaEntry> getSchemas() {
+        return null;
+    }
+
+
+    @Override
+    public List<TableEntry> getTables() {
+        return null;
+    }
+
+
+    @Override
+    public List<ColumnEntry> getColumns() {
+        return null;
     }
 
 

@@ -54,12 +54,14 @@ public class KeyValueStoresTest {
     private static void fillCatalog( DbCatalog catalog ) {
 
         catalog.addSchema( new SchemaEntry( "test" ) );
-        catalog.addTable( new TableEntry( "test", "testTable" ) );
+        /*catalog.addTable( new TableEntry( "test", "testTable" ) );
         catalog.addColumn( new ColumnEntry( "test", "testTable", "testColumn" ) );
 
         catalog.getColumn( "test", "testTable", "testColumn" ).getName();
         catalog.getTable( "test", "testTable" ).getName();
-        catalog.getSchema( "test" ).getName();
+        catalog.getSchema( "test" ).getName();*/
+
+        catalog.getSchemaNames().forEach( System.out::println );
 
     }
 
