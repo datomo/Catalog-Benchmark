@@ -22,6 +22,10 @@ public abstract class CatalogEntry implements Serializable {
     }
 
 
+    /**
+     * Transforms this object into byte form
+     * @return the object in byte form
+     */
     abstract byte[] serialize();
 
 }

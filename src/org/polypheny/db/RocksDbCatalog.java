@@ -234,6 +234,12 @@ public class RocksDbCatalog implements DbCatalog {
 
 
     @Override
+    public List<TableEntry> getTables( String schema ) {
+        return null;
+    }
+
+
+    @Override
     public List<ColumnEntry> getColumns() {
         RocksIterator iterator = this.db.newIterator( this.columns );
         iterator.seekToFirst();
@@ -243,6 +249,18 @@ public class RocksDbCatalog implements DbCatalog {
             iterator.next();
         }
         return columns;
+    }
+
+
+    @Override
+    public List<ColumnEntry> getColumns( String schema ) {
+        return null;
+    }
+
+
+    @Override
+    public List<ColumnEntry> getColumn( String schema, String table ) {
+        return null;
     }
 
 

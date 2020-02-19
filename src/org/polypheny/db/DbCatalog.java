@@ -28,8 +28,13 @@ public interface DbCatalog {
 
     List<TableEntry> getTables();
 
+    List<TableEntry> getTables( String schema );
+
     List<ColumnEntry> getColumns();
 
+    List<ColumnEntry> getColumns( String schema );
+
+    List<ColumnEntry> getColumn( String schema, String table );
 
 
     void close();
