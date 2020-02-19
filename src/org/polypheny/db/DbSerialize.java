@@ -13,7 +13,7 @@ import org.mapdb.Serializer;
 
 
 /**
- * Serializable collection of classes
+ * Collection of different serializers
  */
 public class DbSerialize {
 

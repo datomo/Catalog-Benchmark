@@ -22,7 +22,6 @@ public abstract class CatalogEntry implements Serializable {
     }
 
 
-    abstract byte[] getBytes();
-
+    abstract byte[] serialize();
 
 }

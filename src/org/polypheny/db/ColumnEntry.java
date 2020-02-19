@@ -20,7 +20,7 @@ public class ColumnEntry extends CatalogEntry {
 
 
     @Override
-    public byte[] getBytes() {
-        return Serializer.toByteArray( this );
+    public byte[] serialize() {
+        return Serializer.serialize( this );
     }
 }

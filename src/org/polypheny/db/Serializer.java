@@ -7,56 +7,47 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.List;
+import java.io.Serializable;
 
 
 public class Serializer {
 
 
-    public static byte[] toByteArray( CatalogEntry entry ) {
+    public static <T extends Serializable> byte[] serialize( T entry ) {
         // https://stackoverflow.com/questions/2836646/java-serializable-object-to-byte-array
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        byte[] bytes = null;
         try {
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
             ObjectOutputStream out = new ObjectOutputStream( bos );
             out.writeObject( entry );
             out.flush();
-            return bos.toByteArray();
+            bytes = bos.toByteArray();
+            bos.close();
+            out.close();
+            return bytes;
         } catch ( IOException e ) {
             e.printStackTrace();
-        } finally {
-
         }
-        return null;
+        return bytes;
 
     }
 
 
     // caller needs to handle casting for now
-    // TODO: close streams
-    public static Object fromByteArray( byte[] bytes ) {
-        ByteArrayInputStream bis = new ByteArrayInputStream( bytes );
-        try ( ObjectInput in = new ObjectInputStream( bis ) ) {
-            return in.readObject();
+    public static <S extends Serializable> S deserialize( byte[] bytes ) {
+        S object = null;
+        try {
+            ByteArrayInputStream bis = new ByteArrayInputStream( bytes );
+            ObjectInput in = new ObjectInputStream( bis );
+            object = (S) in.readObject();
+            bis.close();
+            in.close();
+            return object;
         } catch ( IOException | ClassNotFoundException e ) {
             e.printStackTrace();
-        } finally {
         }
-        return null;
+        return object;
 
     }
 
-
-    public static byte[] toByteArray( List<String> list ) {
-        try {
-            ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            ObjectOutputStream oos = new ObjectOutputStream( bos );
-            oos.writeObject( list );
-            oos.flush();
-            return bos.toByteArray();
-
-        } catch ( IOException e ) {
-            e.printStackTrace();
-        }
-        return new byte[0];
-    }
 }

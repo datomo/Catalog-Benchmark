@@ -1,51 +1,81 @@
 package org.polypheny.db;
 
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.NotNull;
 
 
+/**
+ * Should allow some broad benchmarking of different catalog key-value implementations
+ */
 public class KeyValueStoresTest {
 
-    static int iter = 1000000;
+    static int iter = 1000;
 
 
     public static void main( String[] args ) {
-        timeCatalog( new MapDbCatalog(), KeyValueStoresTest::fillTest );
-        timeCatalog( new RocksDbCatalog(), KeyValueStoresTest::fillTest );
-        DbCatalog mapDB = new MapDbCatalog();
-        DbCatalog rocksDB = new RocksDbCatalog();
 
-        fill( mapDB );
-        fill( rocksDB );
+        List<DbCatalog> catalogs = new ArrayList<>();
+        catalogs.add( new MapDbCatalog() );
+        catalogs.add( new RocksDbCatalog() );
 
-        timeCatalog( mapDB, DbCatalog::getColumns );
-        timeCatalog( rocksDB, DbCatalog::getColumns );
+        catalogs.forEach(  KeyValueStoresTest::fill );
+
+        timeMultipleCatalogs( catalogs, DbCatalog::getColumns, "GetColumns()" );
+        timeMultipleCatalogs( catalogs, DbCatalog::getColumnNames, "GetColumnNames()" );
+
+        catalogs.forEach( DbCatalog::close );
+
+
     }
 
 
-    private static void timeCatalog( DbCatalog catalog, Consumer<DbCatalog> func ) {
+    /**
+     * Simple wrapper for applying a timeing function to multiple catalog implementations
+     */
+    private static void timeMultipleCatalogs( List<DbCatalog> catalogs, Consumer<DbCatalog> func, String functName ) {
+        catalogs.forEach( c -> {
+            timeCatalog( c, func, functName );
+        } );
+    }
+
+
+    /**
+     * Repeatedly executes a function on a catalog, times it and outputs it in the end
+     * @param catalog the catalog on which the function gets executed
+     * @param func function which gets executed on the catalog
+     * @param functName name of the function
+     */
+    private static void timeCatalog( DbCatalog catalog, Consumer<DbCatalog> func, String functName ) {
 
         long startTime = System.nanoTime();
         for ( int i = 0; i < iter; i++ ) {
             func.accept( catalog );
         }
-        catalog.close();
+
         long endTime = System.nanoTime();
         long duration = (endTime - startTime);
 
-        logDuration( catalog.getClass().getSimpleName(), duration );
+        printDuration( catalog.getClass().getSimpleName(), functName, duration );
     }
 
 
-    private static void logDuration( String className, long duration ) {
-        System.out.println( "\n" + className );
+    /**
+     * "Pretty prints" the duration results to the terminal
+     */
+    private static void printDuration( String className, String functName, long duration ) {
+        System.out.println( "\n" + className + ": " + functName );
         System.out.println( "Overall: " + insertQuotes( duration ) + "ns" );
         System.out.println( "Single: " + insertQuotes( duration / iter ) + "ns" );
     }
 
 
-    @NotNull
+    /**
+     * Helper function to insert ' into number for better readability
+     * @return the duration separated by '
+     */
     private static StringBuilder insertQuotes( long duration ) {
         StringBuilder result = new StringBuilder();
         int i = Long.toString( duration ).length() - 1;
@@ -60,6 +90,10 @@ public class KeyValueStoresTest {
     }
 
 
+    /**
+     * Simple test fill and execute method for testing
+     * @param catalog the catalog which gets used
+     */
     private static void fillTest( DbCatalog catalog ) {
 
         catalog.addSchema( new SchemaEntry( "test" ) );
@@ -77,6 +111,10 @@ public class KeyValueStoresTest {
     }
 
 
+    /**
+     * Fills the catalog with some dummy data
+     * @param catalog catalog which is operated on
+     */
     private static void fill( DbCatalog catalog ) {
         catalog.addSchema( new SchemaEntry( "test" ) );
         catalog.addSchema( new SchemaEntry( "test2" ) );

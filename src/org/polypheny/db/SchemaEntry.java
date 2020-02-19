@@ -9,10 +9,9 @@ public class SchemaEntry extends CatalogEntry {
     }
 
 
-    // Could be used directly
     @Override
-    public byte[] getBytes() {
-        return Serializer.toByteArray( this );
+    byte[] serialize() {
+        return Serializer.serialize( this );
     }
 
 

@@ -16,7 +16,7 @@ public class TableEntry extends CatalogEntry {
 
 
     @Override
-    byte[] getBytes() {
-        return Serializer.toByteArray( this );
+    byte[] serialize() {
+        return Serializer.serialize( this );
     }
 }
