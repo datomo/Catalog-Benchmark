@@ -1,4 +1,4 @@
-package org.polypheny.db;
+package catalog.db;
 
 
 public class SchemaEntry extends CatalogEntry {

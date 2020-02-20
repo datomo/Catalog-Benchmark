@@ -1,6 +1,10 @@
-package org.polypheny.db;
+package catalog.db;
 
 
+import catalog.db.DbSerialize.ColumnSerializer;
+import catalog.db.DbSerialize.ListSerializer;
+import catalog.db.DbSerialize.SchemaSerializer;
+import catalog.db.DbSerialize.TableSerializer;
 import com.google.common.collect.ImmutableList;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,10 +12,6 @@ import java.util.concurrent.ConcurrentMap;
 import org.mapdb.DB;
 import org.mapdb.DBMaker;
 import org.mapdb.Serializer;
-import org.polypheny.db.DbSerialize.ColumnSerializer;
-import org.polypheny.db.DbSerialize.ListSerializer;
-import org.polypheny.db.DbSerialize.SchemaSerializer;
-import org.polypheny.db.DbSerialize.TableSerializer;
 
 
 /**

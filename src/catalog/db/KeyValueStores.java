@@ -1,18 +1,17 @@
-package org.polypheny.db;
+package catalog.db;
 
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
-import org.jetbrains.annotations.NotNull;
 
 
 /**
  * Should allow some broad benchmarking of different catalog key-value implementations
  */
-public class KeyValueStoresTest {
+public class KeyValueStores {
 
-    static int iter = 1000;
+    static int iter = 100;
 
 
     public static void main( String[] args ) {
@@ -21,7 +20,7 @@ public class KeyValueStoresTest {
         catalogs.add( new MapDbCatalog() );
         catalogs.add( new RocksDbCatalog() );
 
-        catalogs.forEach(  KeyValueStoresTest::fill );
+        catalogs.forEach(  KeyValueStores::fill );
 
         timeMultipleCatalogs( catalogs, DbCatalog::getColumns, "GetColumns()" );
         timeMultipleCatalogs( catalogs, DbCatalog::getColumnNames, "GetColumnNames()" );
