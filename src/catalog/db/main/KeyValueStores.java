@@ -1,4 +1,4 @@
-package catalog.db;
+package catalog.db.main;
 
 
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ import java.util.function.Consumer;
  */
 public class KeyValueStores {
 
-    static int iter = 100;
+    static int iter = 10;
 
 
     public static void main( String[] args ) {
@@ -123,6 +123,7 @@ public class KeyValueStores {
         catalog.addColumn( new ColumnEntry( "test", "testTable", "testColumn" ) );
         catalog.addColumn( new ColumnEntry( "test", "testTable", "testColumn2" ) );
         catalog.addColumn( new ColumnEntry( "test", "testTable", "testColumn3" ) );
+
     }
 
 

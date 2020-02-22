@@ -1,4 +1,4 @@
-package catalog.db;
+package catalog.db.main;
 
 
 public class SchemaEntry extends CatalogEntry {

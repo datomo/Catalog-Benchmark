@@ -1,4 +1,4 @@
-package catalog.db;
+package catalog.db.main;
 
 
 import java.util.List;
@@ -36,6 +36,9 @@ public interface DbCatalog {
 
     List<ColumnEntry> getColumn( String schema, String table );
 
+    boolean isClosed();
 
     void close();
+
+    void clear();
 }

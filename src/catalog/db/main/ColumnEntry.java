@@ -1,4 +1,4 @@
-package catalog.db;
+package catalog.db.main;
 
 
 import lombok.Getter;
@@ -12,7 +12,7 @@ public class ColumnEntry extends CatalogEntry {
     private final String schema;
 
 
-    ColumnEntry( String schema, String table, String name ) {
+    public ColumnEntry( String schema, String table, String name ) {
         super( name );
         this.schema = schema;
         this.table = table;

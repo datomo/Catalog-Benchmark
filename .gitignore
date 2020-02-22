@@ -2,3 +2,5 @@
 out/
 rockdb*/
 test*/
+*.log
+testDB-*

@@ -1,4 +1,4 @@
-package catalog.db;
+package catalog.db.main;
 
 
 import java.nio.charset.StandardCharsets;
@@ -18,16 +18,16 @@ import org.rocksdb.RocksIterator;
  */
 public class RocksDbCatalog implements DbCatalog {
 
-    private final List<ColumnFamilyHandle> columnFamilyHandles;
+    private List<ColumnFamilyHandle> columnFamilyHandles;
     private ColumnFamilyHandle schemas;
     private ColumnFamilyHandle schemaChildren;
     private ColumnFamilyHandle tables;
     private ColumnFamilyHandle tableChildren;
     private ColumnFamilyHandle columns;
 
-    private RocksDB db;
+    private static RocksDB db;
 
-    private final String db_path = "test";
+    private static final String FILE_PATH = "rocksDB";
 
 
     static {
@@ -35,8 +35,12 @@ public class RocksDbCatalog implements DbCatalog {
     }
 
 
-    // TODO: renaming map identifiers
     public RocksDbCatalog() {
+        this( FILE_PATH );
+    }
+
+
+    public RocksDbCatalog( String path ) {
 
         // open DB with two column families
         final List<ColumnFamilyDescriptor> columnFamilyDescriptors = new ArrayList<>();
@@ -59,15 +63,17 @@ public class RocksDbCatalog implements DbCatalog {
         options.setCreateIfMissing( true );
         options.setCreateMissingColumnFamilies( true );
         try {
-            open( columnFamilyDescriptors, columnFamilyHandles, options );
+            open( columnFamilyDescriptors, path, columnFamilyHandles, options );
         } catch ( RocksDBException e ) {
             e.printStackTrace();
         }
     }
 
 
-    private void open( List<ColumnFamilyDescriptor> columnFamilyDescriptors, List<ColumnFamilyHandle> columnFamilyHandles, DBOptions options ) throws RocksDBException {
-        this.db = RocksDB.open( options, db_path, columnFamilyDescriptors, columnFamilyHandles );
+    private void open( List<ColumnFamilyDescriptor> columnFamilyDescriptors, String path, List<ColumnFamilyHandle> columnFamilyHandles, DBOptions options ) throws RocksDBException {
+        //this.db = RocksDB.open( db_path );
+
+        db = RocksDB.open( options, path, columnFamilyDescriptors, columnFamilyHandles );
 
         this.schemas = columnFamilyHandles.get( 0 );
         this.schemaChildren = columnFamilyHandles.get( 1 );
@@ -84,6 +90,12 @@ public class RocksDbCatalog implements DbCatalog {
             handle.close();
         }
         this.db.close();
+    }
+
+
+    @Override
+    public void clear() {
+        //TODO: check if persistent
     }
 
 
@@ -261,6 +273,13 @@ public class RocksDbCatalog implements DbCatalog {
     @Override
     public List<ColumnEntry> getColumn( String schema, String table ) {
         return null;
+    }
+
+
+    @Override
+    public boolean isClosed() {
+        // TODO: temporary fix
+        return true;
     }
 
 
