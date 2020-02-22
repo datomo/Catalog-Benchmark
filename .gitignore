@@ -4,5 +4,6 @@ rockdb*/
 test*/
 *.log
 testDB-*
+testDB-*/
 rocksDB/
 *.sst
