@@ -28,4 +28,11 @@ public abstract class CatalogEntry implements Serializable {
      */
     abstract byte[] serialize();
 
+    /**
+     * Overwrites equals from Object
+     * @param o Object which is compared to
+     * @return if both objects consist of the same
+     */
+    abstract public boolean equals(Object o);
+
 }

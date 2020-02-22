@@ -23,12 +23,12 @@ public class MapDbCatalog implements DbCatalog {
     private static final String FILE_PATH = "mapDB";
     private static DB db;
 
-    private ConcurrentMap<String, SchemaEntry> schemas;
-    private ConcurrentMap<String, TableEntry> tables;
-    private ConcurrentMap<String, ColumnEntry> columns;
+    private static ConcurrentMap<String, SchemaEntry> schemas;
+    private static ConcurrentMap<String, TableEntry> tables;
+    private static ConcurrentMap<String, ColumnEntry> columns;
 
-    private ConcurrentMap<String, List<String>> schemaChildren;
-    private ConcurrentMap<String, List<String>> tableChildren;
+    private static ConcurrentMap<String, List<String>> schemaChildren;
+    private static ConcurrentMap<String, List<String>> tableChildren;
     private DB file;
 
 
@@ -38,9 +38,12 @@ public class MapDbCatalog implements DbCatalog {
 
 
     public MapDbCatalog( String path ) {
-        if( db != null ){
+        if ( db != null && !db.isClosed() ) {
+            return;
+        } else if ( db != null ) {
             db.close();
         }
+
         // TODO: Mmap is faster but can cause crashes on 32 bit environments
         db = DBMaker
                 .fileDB( path )
@@ -51,53 +54,47 @@ public class MapDbCatalog implements DbCatalog {
                 .closeOnJvmShutdown()
                 .make();
 
-        //file.getAllNames().forEach( System.out::println );
-
-
-        /*db = DBMaker
-                //.memoryDB()
-                .fileDB( F )
-                .closeOnJvmShutdown()
-                .make();
-        this.db.*/
-
         initDBLayout( db );
     }
 
 
     private void initDBLayout( DB db ) {
-        this.schemas = createMapIfNotExists( db, "schemas", Serializer.STRING, new SchemaSerializer() );
+        schemas = db.hashMap( "schemas", Serializer.STRING, new SchemaSerializer() ).createOrOpen();
 
-        this.tables = createMapIfNotExists( db, "tables", Serializer.STRING, new TableSerializer() );
+        tables = db.hashMap( "tables", Serializer.STRING, new TableSerializer() ).createOrOpen();
 
-        this.columns = createMapIfNotExists( db, "columns", Serializer.STRING, new ColumnSerializer() );
+        columns = db.hashMap( "columns", Serializer.STRING, new ColumnSerializer() ).createOrOpen();
 
-        this.schemaChildren = createMapIfNotExists( db, "schemaChildren", Serializer.STRING, new ListSerializer<>( Serializer.STRING ) );
+        schemaChildren = db.hashMap( "schemaChildren", Serializer.STRING, new ListSerializer<>( Serializer.STRING ) ).createOrOpen();
 
-        this.tableChildren = createMapIfNotExists( db, "tableChildren", Serializer.STRING, new ListSerializer<>( Serializer.STRING ) );
+        tableChildren = db.hashMap( "tableChildren", Serializer.STRING, new ListSerializer<>( Serializer.STRING ) ).createOrOpen();
     }
 
 
     private <A, B> ConcurrentMap<A, B> createMapIfNotExists( DB db, String name, Serializer<A> keySerializer, Serializer<B> valueSerializer ) {
-        return db.hashMap( name, keySerializer, valueSerializer ).createOrOpen();
+        if( db.get( name ) == null ){
+            return db.hashMap( name, keySerializer, valueSerializer ).create();
+        }
+        return db.get( name );
+
     }
 
 
     @Override
     public void addSchema( SchemaEntry schema ) {
-        this.schemaChildren.put( schema.getName(), ImmutableList.of() );
-        this.schemas.put( schema.getName(), schema );
+        schemaChildren.put( schema.getName(), ImmutableList.of() );
+        schemas.put( schema.getName(), schema );
     }
 
 
     @Override
     public void addTable( TableEntry table ) {
         String schema = table.getSchema();
-        List<String> tables = new ArrayList<>( this.schemaChildren.get( schema ) );
-        tables.add( table.getName() );
-        this.schemaChildren.put( schema, tables );
-        this.tableChildren.put( schema + "." + table.getName(), ImmutableList.of() );
-        this.tables.put( schema + "." + table.getName(), table );
+        List<String> newTables = new ArrayList<>( schemaChildren.get( schema ) );
+        newTables.add( table.getName() );
+        schemaChildren.put( schema, newTables );
+        tableChildren.put( schema + "." + table.getName(), ImmutableList.of() );
+        tables.put( schema + "." + table.getName(), table );
     }
 
 
@@ -105,58 +102,58 @@ public class MapDbCatalog implements DbCatalog {
     public void addColumn( ColumnEntry column ) {
         String schema = column.getSchema();
         String table = column.getTable();
-        List<String> columns = new ArrayList<>( this.tableChildren.get( schema + "." + table ) );
-        columns.add( column.getName() );
-        this.tableChildren.put( schema + "." + table, columns );
-        this.columns.put( schema + "." + table + "." + column.getName(), column );
+        List<String> newColumns = new ArrayList<>( tableChildren.get( schema + "." + table ) );
+        newColumns.add( column.getName() );
+        tableChildren.put( schema + "." + table, newColumns );
+        columns.put( schema + "." + table + "." + column.getName(), column );
     }
 
 
     @Override
     public SchemaEntry getSchema( String schema ) {
-        return this.schemas.get( schema );
+        return schemas.get( schema );
     }
 
 
     @Override
     public TableEntry getTable( String schema, String table ) {
-        return this.tables.get( schema + "." + table );
+        return tables.get( schema + "." + table );
     }
 
 
     @Override
     public ColumnEntry getColumn( String schema, String table, String column ) {
-        return this.columns.get( schema + "." + table + "." + column );
+        return columns.get( schema + "." + table + "." + column );
     }
 
 
     @Override
     public List<String> getSchemaNames() {
-        return new ArrayList<>( this.schemas.keySet() );
+        return new ArrayList<>( schemas.keySet() );
     }
 
 
     @Override
     public List<String> getTableNames() {
-        return new ArrayList<>( this.tables.keySet() );
+        return new ArrayList<>( tables.keySet() );
     }
 
 
     @Override
     public List<String> getColumnNames() {
-        return new ArrayList<>( this.columns.keySet() );
+        return new ArrayList<>( columns.keySet() );
     }
 
 
     @Override
     public List<SchemaEntry> getSchemas() {
-        return new ArrayList<>( this.schemas.values() );
+        return new ArrayList<>( schemas.values() );
     }
 
 
     @Override
     public List<TableEntry> getTables() {
-        return new ArrayList<>( this.tables.values() );
+        return new ArrayList<>( tables.values() );
     }
 
 
@@ -168,7 +165,7 @@ public class MapDbCatalog implements DbCatalog {
 
     @Override
     public List<ColumnEntry> getColumns() {
-        return new ArrayList<>( this.columns.values() );
+        return new ArrayList<>( columns.values() );
     }
 
 
@@ -186,7 +183,7 @@ public class MapDbCatalog implements DbCatalog {
 
     @Override
     public boolean isClosed() {
-        return this.db.isClosed();
+        return db.isClosed();
     }
 
 
@@ -195,17 +192,17 @@ public class MapDbCatalog implements DbCatalog {
         // moveToDisk();
 
         // this.file.close();
-        this.db.close();
+        db.close();
     }
 
 
     @Override
     public void clear() {
-        this.schemas.clear();
-        this.schemaChildren.clear();
-        this.tables.clear();
-        this.tableChildren.clear();
-        this.columns.clear();
+        schemas.clear();
+        schemaChildren.clear();
+        tables.clear();
+        tableChildren.clear();
+        columns.clear();
     }
 
 

@@ -19,4 +19,13 @@ public class TableEntry extends CatalogEntry {
     byte[] serialize() {
         return Serializer.serialize( this );
     }
+
+    @Override
+    public boolean equals( Object o ) {
+        if (!(o instanceof TableEntry)) {
+            return false;
+        }
+        TableEntry other = (TableEntry) o;
+        return this.schema.equals( other.schema ) && this.getName().equals( other.getName() );
+    }
 }
