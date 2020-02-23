@@ -1,6 +1,10 @@
 package catalog.db.main;
 
 
+import catalog.db.main.entity.ColumnEntry;
+import catalog.db.main.entity.SchemaEntry;
+import catalog.db.main.entity.Serializer;
+import catalog.db.main.entity.TableEntry;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
@@ -103,7 +107,7 @@ public class RocksDbCatalog implements DbCatalog {
     @Override
     public void addSchema( SchemaEntry schema ) {
         try {
-            String name = schema.getName();
+            String name = schema.name;
             db.put( this.schemaChildren, name.getBytes(), Serializer.serialize( new ArrayList<>() ) );
             db.put( this.schemas, name.getBytes(), schema.serialize() );
         } catch ( RocksDBException e ) {
@@ -114,15 +118,15 @@ public class RocksDbCatalog implements DbCatalog {
 
     @Override
     public void addTable( TableEntry table ) {
-        String schema = table.getSchema();
+        String schema = table.schemaName;
         try {
             byte[] bytes = db.get( this.schemaChildren, schema.getBytes() );
             ArrayList<String> list = Serializer.deserialize( bytes );
             ArrayList<String> tables = new ArrayList<>( list );
-            tables.add( table.getName() );
+            tables.add( table.name );
             db.put( this.schemaChildren, schema.getBytes(), Serializer.serialize( tables ) );
-            db.put( this.tables, (schema + "." + table.getName()).getBytes(), Serializer.serialize( table ) );
-            db.put( this.tableChildren, (schema + "." + table.getName()).getBytes(), Serializer.serialize( new ArrayList<>() ) );
+            db.put( this.tables, (schema + "." + table.name).getBytes(), Serializer.serialize( table ) );
+            db.put( this.tableChildren, (schema + "." + table.name).getBytes(), Serializer.serialize( new ArrayList<>() ) );
         } catch ( RocksDBException e ) {
             e.printStackTrace();
         }
@@ -132,14 +136,14 @@ public class RocksDbCatalog implements DbCatalog {
 
     @Override
     public void addColumn( ColumnEntry column ) {
-        String schema = column.getSchema();
-        String table = column.getTable();
+        String schema = column.schemaName;
+        String table = column.tableName;
         try {
             byte[] bytes = db.get( this.tableChildren, (schema + "." + table).getBytes() );
             ArrayList<String> columns = new ArrayList<>( Serializer.deserialize( bytes ) );
-            columns.add( column.getName() );
+            columns.add( column.name );
             db.put( this.tableChildren, (schema + "." + table).getBytes(), Serializer.serialize( columns ) );
-            db.put( this.columns, (schema + "." + table + "." + column.getName()).getBytes(), Serializer.serialize( column ) );
+            db.put( this.columns, (schema + "." + table + "." + column.name).getBytes(), Serializer.serialize( column ) );
         } catch ( RocksDBException e ) {
             e.printStackTrace();
         }
@@ -183,7 +187,7 @@ public class RocksDbCatalog implements DbCatalog {
 
     @Override
     public List<String> getSchemaNames() {
-        RocksIterator iterator = this.db.newIterator( this.schemas );
+        RocksIterator iterator = db.newIterator( this.schemas );
         iterator.seekToFirst();
         List<String> names = new ArrayList<>();
         while ( iterator.isValid() ) {
@@ -196,7 +200,7 @@ public class RocksDbCatalog implements DbCatalog {
 
     @Override
     public List<String> getTableNames() {
-        RocksIterator iterator = this.db.newIterator( this.tables );
+        RocksIterator iterator = db.newIterator( this.tables );
         iterator.seekToFirst();
         List<String> names = new ArrayList<>();
         while ( iterator.isValid() ) {
@@ -209,7 +213,7 @@ public class RocksDbCatalog implements DbCatalog {
 
     @Override
     public List<String> getColumnNames() {
-        RocksIterator iterator = this.db.newIterator( this.columns );
+        RocksIterator iterator = db.newIterator( this.columns );
         iterator.seekToFirst();
         List<String> names = new ArrayList<>();
         while ( iterator.isValid() ) {
@@ -222,7 +226,7 @@ public class RocksDbCatalog implements DbCatalog {
 
     @Override
     public List<SchemaEntry> getSchemas() {
-        RocksIterator iterator = this.db.newIterator( this.schemas );
+        RocksIterator iterator = db.newIterator( this.schemas );
         iterator.seekToFirst();
         List<SchemaEntry> schemas = new ArrayList<>();
         while ( iterator.isValid() ) {
@@ -235,7 +239,7 @@ public class RocksDbCatalog implements DbCatalog {
 
     @Override
     public List<TableEntry> getTables() {
-        RocksIterator iterator = this.db.newIterator( this.tables );
+        RocksIterator iterator = db.newIterator( this.tables );
         iterator.seekToFirst();
         List<TableEntry> tables = new ArrayList<>();
         while ( iterator.isValid() ) {
@@ -254,7 +258,7 @@ public class RocksDbCatalog implements DbCatalog {
 
     @Override
     public List<ColumnEntry> getColumns() {
-        RocksIterator iterator = this.db.newIterator( this.columns );
+        RocksIterator iterator = db.newIterator( this.columns );
         iterator.seekToFirst();
         List<ColumnEntry> columns = new ArrayList<>();
         while ( iterator.isValid() ) {

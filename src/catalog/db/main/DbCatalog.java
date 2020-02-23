@@ -1,6 +1,9 @@
 package catalog.db.main;
 
 
+import catalog.db.main.entity.ColumnEntry;
+import catalog.db.main.entity.SchemaEntry;
+import catalog.db.main.entity.TableEntry;
 import java.util.List;
 
 

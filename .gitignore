@@ -6,4 +6,5 @@ test*/
 testDB-*
 testDB-*/
 rocksDB/
+mapDB
 *.sst

@@ -1,4 +1,4 @@
-package catalog.db.main;
+package catalog.db.main.entity;
 
 
 import java.io.ByteArrayInputStream;
@@ -49,5 +49,6 @@ public class Serializer {
         return object;
 
     }
+
 
 }

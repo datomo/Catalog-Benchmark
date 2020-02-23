@@ -1,10 +1,10 @@
-package catalog.db.main;
+package catalog.db.main.entity;
 
 
+import com.google.common.collect.ImmutableList;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import org.jetbrains.annotations.NotNull;
 import org.mapdb.DataInput2;
@@ -17,19 +17,19 @@ import org.mapdb.Serializer;
  */
 public class DbSerialize {
 
-    static class SchemaSerializer implements Serializer<SchemaEntry>, Serializable {
+    public static class GenericSerializer<T extends Serializable> implements Serializer<T>, Serializable {
 
 
         @Override
-        public void serialize( @NotNull DataOutput2 dataOutput2, @NotNull SchemaEntry schema ) throws IOException {
-            dataOutput2.writeUTF( schema.getName() );
+        public void serialize( @NotNull DataOutput2 dataOutput2, @NotNull T entry ) throws IOException {
+            Serializer.BYTE_ARRAY.serialize( dataOutput2, catalog.db.main.entity.Serializer.serialize( entry ) );
 
         }
 
 
         @Override
-        public SchemaEntry deserialize( @NotNull DataInput2 dataInput2, int i ) throws IOException {
-            return new SchemaEntry( dataInput2.readUTF() );
+        public T deserialize( @NotNull DataInput2 dataInput2, int i ) throws IOException {
+            return catalog.db.main.entity.Serializer.deserialize( Serializer.BYTE_ARRAY.deserialize( dataInput2, i ) );
         }
     }
 
@@ -37,7 +37,7 @@ public class DbSerialize {
     /**
      * TODO: list list list why
      */
-    static class ListSerializer<T> implements Serializer<List<T>>, Serializable {
+    public static class ListSerializer<T> implements Serializer<ImmutableList<ArrayList<T>>>, Serializable {
 
         final public Serializer<T> serializer;
 
@@ -48,10 +48,10 @@ public class DbSerialize {
 
 
         @Override
-        public void serialize( @NotNull DataOutput2 dataOutput2, @NotNull List<T> list ) throws IOException {
+        public void serialize( @NotNull DataOutput2 dataOutput2, @NotNull ImmutableList<ArrayList<T>> list ) throws IOException {
             dataOutput2.writeInt( list.size() );
 
-            list.forEach( e -> {
+            list.get( 0 ).forEach( e -> {
                 try {
                     this.serializer.serialize( dataOutput2, e );
                 } catch ( IOException ex ) {
@@ -62,13 +62,13 @@ public class DbSerialize {
 
 
         @Override
-        public List<T> deserialize( @NotNull DataInput2 dataInput2, int i ) throws IOException {
+        public ImmutableList<ArrayList<T>> deserialize( @NotNull DataInput2 dataInput2, int i ) throws IOException {
             int size = dataInput2.readInt();
-            List<T> tables = new ArrayList<>();
+            ArrayList<T> tables = new ArrayList<>();
             for ( int j = 0; j < size; j++ ) {
                 tables.add( serializer.deserialize( dataInput2, i ) );
             }
-            return Collections.unmodifiableList( tables );
+            return ImmutableList.of( tables );
         }
 
 
@@ -79,7 +79,8 @@ public class DbSerialize {
     }
 
 
-    static class TableSerializer implements Serializer<TableEntry>, Serializable {
+
+    /*static class TableSerializer implements Serializer<TableEntry>, Serializable {
 
         @Override
         public void serialize( @NotNull DataOutput2 dataOutput2, @NotNull TableEntry table ) throws IOException {
@@ -109,5 +110,5 @@ public class DbSerialize {
         public ColumnEntry deserialize( @NotNull DataInput2 dataInput2, int i ) throws IOException {
             return new ColumnEntry( dataInput2.readUTF(), dataInput2.readUTF(), dataInput2.readUTF() );
         }
-    }
+    }*/
 }

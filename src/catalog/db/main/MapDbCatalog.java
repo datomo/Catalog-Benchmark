@@ -1,16 +1,19 @@
 package catalog.db.main;
 
 
-import catalog.db.main.DbSerialize.ColumnSerializer;
-import catalog.db.main.DbSerialize.ListSerializer;
-import catalog.db.main.DbSerialize.SchemaSerializer;
-import catalog.db.main.DbSerialize.TableSerializer;
+import catalog.db.main.entity.ColumnEntry;
+import catalog.db.main.entity.DbSerialize;
+import catalog.db.main.entity.DbSerialize.GenericSerializer;
+import catalog.db.main.entity.DbSerialize.ListSerializer;
+import catalog.db.main.entity.SchemaEntry;
+import catalog.db.main.entity.TableEntry;
 import com.google.common.collect.ImmutableList;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentMap;
 import org.mapdb.DB;
 import org.mapdb.DBMaker;
+import org.mapdb.HTreeMap;
 import org.mapdb.Serializer;
 
 
@@ -27,8 +30,8 @@ public class MapDbCatalog implements DbCatalog {
     private static ConcurrentMap<String, TableEntry> tables;
     private static ConcurrentMap<String, ColumnEntry> columns;
 
-    private static ConcurrentMap<String, List<String>> schemaChildren;
-    private static ConcurrentMap<String, List<String>> tableChildren;
+    private static ConcurrentMap<String, ImmutableList<String>> schemaChildren;
+    private static ConcurrentMap<String, ImmutableList<String>> tableChildren;
     private DB file;
 
 
@@ -59,20 +62,20 @@ public class MapDbCatalog implements DbCatalog {
 
 
     private void initDBLayout( DB db ) {
-        schemas = db.hashMap( "schemas", Serializer.STRING, new SchemaSerializer() ).createOrOpen();
+        schemas = db.hashMap( "schemas", Serializer.STRING, new DbSerialize.GenericSerializer<SchemaEntry>() ).createOrOpen();
 
-        tables = db.hashMap( "tables", Serializer.STRING, new TableSerializer() ).createOrOpen();
+        tables = db.hashMap( "tables", Serializer.STRING, new DbSerialize.GenericSerializer<TableEntry>() ).createOrOpen();
 
-        columns = db.hashMap( "columns", Serializer.STRING, new ColumnSerializer() ).createOrOpen();
+        columns = db.hashMap( "columns", Serializer.STRING, new DbSerialize.GenericSerializer<ColumnEntry>() ).createOrOpen();
 
-        schemaChildren = db.hashMap( "schemaChildren", Serializer.STRING, new ListSerializer<>( Serializer.STRING ) ).createOrOpen();
+        schemaChildren = db.hashMap( "schemaChildren", Serializer.STRING, new DbSerialize.GenericSerializer<ImmutableList<String>>() ).createOrOpen();
 
-        tableChildren = db.hashMap( "tableChildren", Serializer.STRING, new ListSerializer<>( Serializer.STRING ) ).createOrOpen();
+        tableChildren = db.hashMap( "tableChildren", Serializer.STRING, new DbSerialize.GenericSerializer<ImmutableList<String>>() ).createOrOpen();
     }
 
 
     private <A, B> ConcurrentMap<A, B> createMapIfNotExists( DB db, String name, Serializer<A> keySerializer, Serializer<B> valueSerializer ) {
-        if( db.get( name ) == null ){
+        if ( db.get( name ) == null ) {
             return db.hashMap( name, keySerializer, valueSerializer ).create();
         }
         return db.get( name );
@@ -82,30 +85,30 @@ public class MapDbCatalog implements DbCatalog {
 
     @Override
     public void addSchema( SchemaEntry schema ) {
-        schemaChildren.put( schema.getName(), ImmutableList.of() );
-        schemas.put( schema.getName(), schema );
+        schemaChildren.put( schema.name, ImmutableList.of() );
+        schemas.put( schema.name, schema );
     }
 
 
     @Override
     public void addTable( TableEntry table ) {
-        String schema = table.getSchema();
-        List<String> newTables = new ArrayList<>( schemaChildren.get( schema ) );
-        newTables.add( table.getName() );
-        schemaChildren.put( schema, newTables );
-        tableChildren.put( schema + "." + table.getName(), ImmutableList.of() );
-        tables.put( schema + "." + table.getName(), table );
+        String schema = table.schemaName;
+        ArrayList<String> newTables = new ArrayList<>( schemaChildren.get( schema ) );
+        newTables.add( table.name );
+        schemaChildren.put( schema, ImmutableList.copyOf( newTables ) );
+        tableChildren.put( schema + "." + table.name, ImmutableList.of() );
+        tables.put( schema + "." + table.name, table );
     }
 
 
     @Override
     public void addColumn( ColumnEntry column ) {
-        String schema = column.getSchema();
-        String table = column.getTable();
+        String schema = column.schemaName;
+        String table = column.tableName;
         List<String> newColumns = new ArrayList<>( tableChildren.get( schema + "." + table ) );
-        newColumns.add( column.getName() );
-        tableChildren.put( schema + "." + table, newColumns );
-        columns.put( schema + "." + table + "." + column.getName(), column );
+        newColumns.add( column.name );
+        tableChildren.put( schema + "." + table, ImmutableList.copyOf( newColumns ) );
+        columns.put( schema + "." + table + "." + column.name, column );
     }
 
 
@@ -210,9 +213,9 @@ public class MapDbCatalog implements DbCatalog {
      * Creates the existing database layout on the file db and moves all the infos to it.
      */
     private void moveToDisk() {
-        ConcurrentMap<String, SchemaEntry> schemasFile = createMapIfNotExists( this.file, "schemas", Serializer.STRING, new SchemaSerializer() );
-        ConcurrentMap<String, TableEntry> tablesFile = createMapIfNotExists( this.file, "tables", Serializer.STRING, new TableSerializer() );
-        ConcurrentMap<String, ColumnEntry> columnsFile = createMapIfNotExists( this.file, "columns", Serializer.STRING, new ColumnSerializer() );
+        ConcurrentMap<String, SchemaEntry> schemasFile = createMapIfNotExists( this.file, "schemas", Serializer.STRING, new DbSerialize.GenericSerializer<>() );
+        ConcurrentMap<String, TableEntry> tablesFile = createMapIfNotExists( this.file, "tables", Serializer.STRING, new DbSerialize.GenericSerializer<>() );
+        ConcurrentMap<String, ColumnEntry> columnsFile = createMapIfNotExists( this.file, "columns", Serializer.STRING, new DbSerialize.GenericSerializer<>() );
 
         schemasFile.clear();
         tablesFile.clear();

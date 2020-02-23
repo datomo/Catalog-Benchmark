@@ -1,6 +1,9 @@
 package catalog.db.main;
 
 
+import catalog.db.main.entity.ColumnEntry;
+import catalog.db.main.entity.SchemaEntry;
+import catalog.db.main.entity.TableEntry;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
@@ -11,7 +14,7 @@ import java.util.function.Consumer;
  */
 public class KeyValueStores {
 
-    static int iter = 10;
+    static int iter = 1;
 
 
     public static void main( String[] args ) {
@@ -95,13 +98,13 @@ public class KeyValueStores {
      */
     private static void fillTest( DbCatalog catalog ) {
 
-        catalog.addSchema( new SchemaEntry( "test" ) );
-        catalog.addTable( new TableEntry( "test", "testTable" ) );
-        catalog.addColumn( new ColumnEntry( "test", "testTable", "testColumn" ) );
+        catalog.addSchema( new SchemaEntry( 1, "schema", 1, "APP", 1, "user" ));
+        catalog.addTable( new TableEntry( 1, "table", 1, "schema", 1, "APP", 1, "user", "???", (long) 10000 ) );
+        catalog.addColumn( new ColumnEntry( 1, "column", 1, "table", 1, "schema", 1, "APP", 1, 255, 2, false ) );
 
-        catalog.getColumn( "test", "testTable", "testColumn" ).getName();
-        catalog.getTable( "test", "testTable" ).getName();
-        catalog.getSchema( "test" ).getName();
+        catalog.getColumn( "test", "testTable", "testColumn" );
+        catalog.getTable( "test", "testTable" );
+        catalog.getSchema( "test" );
 
         catalog.getSchemaNames();
         catalog.getSchemaNames();
@@ -115,14 +118,14 @@ public class KeyValueStores {
      * @param catalog catalog which is operated on
      */
     private static void fill( DbCatalog catalog ) {
-        catalog.addSchema( new SchemaEntry( "test" ) );
-        catalog.addSchema( new SchemaEntry( "test2" ) );
-        catalog.addTable( new TableEntry( "test", "testTable" ) );
-        catalog.addTable( new TableEntry( "test", "testTable1" ) );
-        catalog.addTable( new TableEntry( "test", "testTable3" ) );
-        catalog.addColumn( new ColumnEntry( "test", "testTable", "testColumn" ) );
-        catalog.addColumn( new ColumnEntry( "test", "testTable", "testColumn2" ) );
-        catalog.addColumn( new ColumnEntry( "test", "testTable", "testColumn3" ) );
+
+        catalog.addSchema( new SchemaEntry( 1, "schema", 1, "APP", 1, "user" ));
+        catalog.addSchema( new SchemaEntry( 1, "schema3", 1, "APP", 1, "user" ));
+        catalog.addTable( new TableEntry( 1, "table", 1, "schema", 1, "APP", 1, "user", "???", (long) 10000 ) );
+        catalog.addColumn( new ColumnEntry( 1, "column", 1, "table", 1, "schema", 1, "APP", 1, 255, 2, false ) );
+        catalog.addSchema( new SchemaEntry( 1, "schema2", 1, "APP", 1, "user" ));
+        catalog.addTable( new TableEntry( 1, "table2", 1, "schema", 1, "APP", 1, "user", "???", (long) 10000 ) );
+        catalog.addColumn( new ColumnEntry( 1, "column2", 1, "table2", 1, "schema", 1, "APP", 1, 255, 2, false ) );
 
     }
 
