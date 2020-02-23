@@ -14,7 +14,7 @@ import java.util.function.Consumer;
  */
 public class KeyValueStores {
 
-    static int iter = 1;
+    static int iter = 100;
 
 
     public static void main( String[] args ) {
@@ -35,7 +35,7 @@ public class KeyValueStores {
 
 
     /**
-     * Simple wrapper for applying a timeing function to multiple catalog implementations
+     * Simple wrapper for applying a timing function to multiple catalog implementations
      */
     private static void timeMultipleCatalogs( List<DbCatalog> catalogs, Consumer<DbCatalog> func, String functName ) {
         catalogs.forEach( c -> {

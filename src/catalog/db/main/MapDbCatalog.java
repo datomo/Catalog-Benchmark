@@ -3,8 +3,6 @@ package catalog.db.main;
 
 import catalog.db.main.entity.ColumnEntry;
 import catalog.db.main.entity.DbSerialize;
-import catalog.db.main.entity.DbSerialize.GenericSerializer;
-import catalog.db.main.entity.DbSerialize.ListSerializer;
 import catalog.db.main.entity.SchemaEntry;
 import catalog.db.main.entity.TableEntry;
 import com.google.common.collect.ImmutableList;
@@ -71,15 +69,6 @@ public class MapDbCatalog implements DbCatalog {
         schemaChildren = db.hashMap( "schemaChildren", Serializer.STRING, new DbSerialize.GenericSerializer<ImmutableList<String>>() ).createOrOpen();
 
         tableChildren = db.hashMap( "tableChildren", Serializer.STRING, new DbSerialize.GenericSerializer<ImmutableList<String>>() ).createOrOpen();
-    }
-
-
-    private <A, B> ConcurrentMap<A, B> createMapIfNotExists( DB db, String name, Serializer<A> keySerializer, Serializer<B> valueSerializer ) {
-        if ( db.get( name ) == null ) {
-            return db.hashMap( name, keySerializer, valueSerializer ).create();
-        }
-        return db.get( name );
-
     }
 
 
@@ -192,9 +181,6 @@ public class MapDbCatalog implements DbCatalog {
 
     @Override
     public void close() {
-        // moveToDisk();
-
-        // this.file.close();
         db.close();
     }
 
@@ -213,9 +199,9 @@ public class MapDbCatalog implements DbCatalog {
      * Creates the existing database layout on the file db and moves all the infos to it.
      */
     private void moveToDisk() {
-        ConcurrentMap<String, SchemaEntry> schemasFile = createMapIfNotExists( this.file, "schemas", Serializer.STRING, new DbSerialize.GenericSerializer<>() );
-        ConcurrentMap<String, TableEntry> tablesFile = createMapIfNotExists( this.file, "tables", Serializer.STRING, new DbSerialize.GenericSerializer<>() );
-        ConcurrentMap<String, ColumnEntry> columnsFile = createMapIfNotExists( this.file, "columns", Serializer.STRING, new DbSerialize.GenericSerializer<>() );
+        HTreeMap<String, SchemaEntry> schemasFile = this.file.hashMap( "schemas", Serializer.STRING, new DbSerialize.GenericSerializer<SchemaEntry>() ).createOrOpen();
+        ConcurrentMap<String, TableEntry> tablesFile = this.file.hashMap( "tables", Serializer.STRING, new DbSerialize.GenericSerializer<TableEntry>() ).createOrOpen();
+        ConcurrentMap<String, ColumnEntry> columnsFile = this.file.hashMap( "columns", Serializer.STRING, new DbSerialize.GenericSerializer<ColumnEntry>() ).createOrOpen();
 
         schemasFile.clear();
         tablesFile.clear();
@@ -226,14 +212,4 @@ public class MapDbCatalog implements DbCatalog {
         columns.forEach( columnsFile::put );
     }
 
-
-    private void getFromDisk() {
-
-    }
-
-
-    static class TableExistsException extends Exception {
-
-        final String message = "table already exists in the catalog database";
-    }
 }
