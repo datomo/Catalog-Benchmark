@@ -8,11 +8,13 @@ import catalog.db.main.entity.TableEntry;
 import com.google.common.collect.ImmutableList;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NavigableSet;
 import java.util.concurrent.ConcurrentMap;
 import org.mapdb.DB;
 import org.mapdb.DBMaker;
 import org.mapdb.HTreeMap;
 import org.mapdb.Serializer;
+import org.mapdb.serializer.SerializerArrayTuple;
 
 
 /**
@@ -24,12 +26,13 @@ public class MapDbCatalog implements DbCatalog {
     private static final String FILE_PATH = "mapDB";
     private static DB db;
 
-    private static ConcurrentMap<String, SchemaEntry> schemas;
-    private static ConcurrentMap<String, TableEntry> tables;
-    private static ConcurrentMap<String, ColumnEntry> columns;
+    private static HTreeMap<String, SchemaEntry> schemas;
+    private static HTreeMap<String, TableEntry> tables;
+    private static HTreeMap<String, ColumnEntry> columns;
 
-    private static ConcurrentMap<String, ImmutableList<String>> schemaChildren;
-    private static ConcurrentMap<String, ImmutableList<String>> tableChildren;
+    private static HTreeMap<String, ImmutableList<String>> schemaChildren;
+    //private static NavigableSet<Object[]> schemaChildren;
+    private static HTreeMap<String, ImmutableList<String>> tableChildren;
     private DB file;
 
 
@@ -54,6 +57,7 @@ public class MapDbCatalog implements DbCatalog {
                 //.fileDeleteAfterOpen()
                 .closeOnJvmShutdown()
                 .make();
+        //db = DBMaker.memoryDB().make();
 
         initDBLayout( db );
     }
@@ -69,6 +73,14 @@ public class MapDbCatalog implements DbCatalog {
         schemaChildren = db.hashMap( "schemaChildren", Serializer.STRING, new DbSerialize.GenericSerializer<ImmutableList<String>>() ).createOrOpen();
 
         tableChildren = db.hashMap( "tableChildren", Serializer.STRING, new DbSerialize.GenericSerializer<ImmutableList<String>>() ).createOrOpen();
+
+        /*schemaChildren = db.treeSet("towns")
+                //set tuple serializer
+                .serializer(new SerializerArrayTuple(Serializer.STRING, Serializer.STRING))
+                .counterEnable()
+                .counterEnable()
+                .counterEnable()
+                .createOrOpen();*/
     }
 
 
