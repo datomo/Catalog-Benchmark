@@ -33,7 +33,7 @@ public class TableEntry extends CatalogEntry {
 
     @Override
     byte[] serialize() {
-        return Serializer.serialize( this );
+        return GenericSerializer.serialize( this );
     }
 
     @Override

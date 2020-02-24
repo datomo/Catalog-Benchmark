@@ -2,19 +2,17 @@ package catalog.db.main;
 
 
 import catalog.db.main.entity.ColumnEntry;
-import catalog.db.main.entity.DbSerialize;
+import catalog.db.main.entity.GenericSerializer;
 import catalog.db.main.entity.SchemaEntry;
 import catalog.db.main.entity.TableEntry;
 import com.google.common.collect.ImmutableList;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NavigableSet;
 import java.util.concurrent.ConcurrentMap;
 import org.mapdb.DB;
 import org.mapdb.DBMaker;
 import org.mapdb.HTreeMap;
 import org.mapdb.Serializer;
-import org.mapdb.serializer.SerializerArrayTuple;
 
 
 /**
@@ -64,15 +62,15 @@ public class MapDbCatalog implements DbCatalog {
 
 
     private void initDBLayout( DB db ) {
-        schemas = db.hashMap( "schemas", Serializer.STRING, new DbSerialize.GenericSerializer<SchemaEntry>() ).createOrOpen();
+        schemas = db.hashMap( "schemas", Serializer.STRING, new GenericSerializer<SchemaEntry>() ).createOrOpen();
 
-        tables = db.hashMap( "tables", Serializer.STRING, new DbSerialize.GenericSerializer<TableEntry>() ).createOrOpen();
+        tables = db.hashMap( "tables", Serializer.STRING, new GenericSerializer<TableEntry>() ).createOrOpen();
 
-        columns = db.hashMap( "columns", Serializer.STRING, new DbSerialize.GenericSerializer<ColumnEntry>() ).createOrOpen();
+        columns = db.hashMap( "columns", Serializer.STRING, new GenericSerializer<ColumnEntry>() ).createOrOpen();
 
-        schemaChildren = db.hashMap( "schemaChildren", Serializer.STRING, new DbSerialize.GenericSerializer<ImmutableList<String>>() ).createOrOpen();
+        schemaChildren = db.hashMap( "schemaChildren", Serializer.STRING, new GenericSerializer<ImmutableList<String>>() ).createOrOpen();
 
-        tableChildren = db.hashMap( "tableChildren", Serializer.STRING, new DbSerialize.GenericSerializer<ImmutableList<String>>() ).createOrOpen();
+        tableChildren = db.hashMap( "tableChildren", Serializer.STRING, new GenericSerializer<ImmutableList<String>>() ).createOrOpen();
 
         /*schemaChildren = db.treeSet("towns")
                 //set tuple serializer
@@ -211,9 +209,9 @@ public class MapDbCatalog implements DbCatalog {
      * Creates the existing database layout on the file db and moves all the infos to it.
      */
     private void moveToDisk() {
-        HTreeMap<String, SchemaEntry> schemasFile = this.file.hashMap( "schemas", Serializer.STRING, new DbSerialize.GenericSerializer<SchemaEntry>() ).createOrOpen();
-        ConcurrentMap<String, TableEntry> tablesFile = this.file.hashMap( "tables", Serializer.STRING, new DbSerialize.GenericSerializer<TableEntry>() ).createOrOpen();
-        ConcurrentMap<String, ColumnEntry> columnsFile = this.file.hashMap( "columns", Serializer.STRING, new DbSerialize.GenericSerializer<ColumnEntry>() ).createOrOpen();
+        HTreeMap<String, SchemaEntry> schemasFile = this.file.hashMap( "schemas", Serializer.STRING, new GenericSerializer<SchemaEntry>() ).createOrOpen();
+        ConcurrentMap<String, TableEntry> tablesFile = this.file.hashMap( "tables", Serializer.STRING, new GenericSerializer<TableEntry>() ).createOrOpen();
+        ConcurrentMap<String, ColumnEntry> columnsFile = this.file.hashMap( "columns", Serializer.STRING, new GenericSerializer<ColumnEntry>() ).createOrOpen();
 
         schemasFile.clear();
         tablesFile.clear();

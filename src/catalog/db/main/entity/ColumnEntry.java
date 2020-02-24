@@ -40,7 +40,7 @@ public class ColumnEntry extends CatalogEntry {
 
     @Override
     public byte[] serialize() {
-        return Serializer.serialize( this );
+        return GenericSerializer.serialize( this );
     }
 
 

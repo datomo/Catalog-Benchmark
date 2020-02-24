@@ -25,7 +25,7 @@ public class DatabaseEntry extends CatalogEntry {
 
     @Override
     byte[] serialize() {
-        return Serializer.serialize(this);
+        return GenericSerializer.serialize(this);
     }
 
 
