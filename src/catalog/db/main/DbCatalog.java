@@ -37,7 +37,9 @@ public interface DbCatalog {
 
     List<ColumnEntry> getColumns( String schema );
 
-    List<ColumnEntry> getColumn( String schema, String table );
+    ColumnEntry getColumn( String schema, String table );
+
+    Long getColumn( Long schemaId, Long tableId );
 
     boolean isClosed();
 

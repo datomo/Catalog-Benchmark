@@ -31,6 +31,7 @@ public class MapDbCatalog implements DbCatalog {
     private static HTreeMap<String, ImmutableList<String>> schemaChildren;
     //private static NavigableSet<Object[]> schemaChildren;
     private static HTreeMap<String, ImmutableList<String>> tableChildren;
+    private static HTreeMap<long[], Long> columnWithId;
     private DB file;
 
 
@@ -72,6 +73,8 @@ public class MapDbCatalog implements DbCatalog {
 
         tableChildren = db.hashMap( "tableChildren", Serializer.STRING, new GenericSerializer<ImmutableList<String>>() ).createOrOpen();
 
+        columnWithId = db.hashMap( "columnsId", Serializer.LONG_ARRAY, Serializer.LONG ).createOrOpen();
+
         /*schemaChildren = db.treeSet("towns")
                 //set tuple serializer
                 .serializer(new SerializerArrayTuple(Serializer.STRING, Serializer.STRING))
@@ -108,6 +111,8 @@ public class MapDbCatalog implements DbCatalog {
         newColumns.add( column.name );
         tableChildren.put( schema + "." + table, ImmutableList.copyOf( newColumns ) );
         columns.put( schema + "." + table + "." + column.name, column );
+
+        columnWithId.put( new long[]{ 2L, 3L }, 5L );
     }
 
 
@@ -178,8 +183,14 @@ public class MapDbCatalog implements DbCatalog {
 
 
     @Override
-    public List<ColumnEntry> getColumn( String schema, String table ) {
+    public ColumnEntry getColumn( String schema, String table ) {
         return null;
+    }
+
+
+    @Override
+    public Long getColumn( Long schemaId, Long tableId ) {
+        return columnWithId.get( new long[]{schemaId, tableId} );
     }
 
 

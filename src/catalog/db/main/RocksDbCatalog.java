@@ -276,7 +276,13 @@ public class RocksDbCatalog implements DbCatalog {
 
 
     @Override
-    public List<ColumnEntry> getColumn( String schema, String table ) {
+    public ColumnEntry getColumn( String schema, String table ) {
+        return null;
+    }
+
+
+    @Override
+    public Long getColumn( Long schemaId, Long tableId ) {
         return null;
     }
 

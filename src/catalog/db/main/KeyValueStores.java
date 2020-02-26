@@ -32,6 +32,9 @@ public class KeyValueStores {
 
 
 
+        timeCatalog( catalogs.get( 0 ), c -> c.getColumn( 2L, 3L ), "getCompositeColumn()" );
+
+
         timeMultipleCatalogsRandom( catalogs, ( DbCatalog c, Integer i ) -> {
             if ( i == 0 ) {
                 c.getColumnNames();
