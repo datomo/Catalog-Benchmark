@@ -7,12 +7,17 @@ import catalog.db.main.entity.SchemaEntry;
 import catalog.db.main.entity.TableEntry;
 import com.google.common.collect.ImmutableList;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ConcurrentMap;
+import java.util.stream.Collectors;
+import org.mapdb.BTreeMap;
 import org.mapdb.DB;
 import org.mapdb.DBMaker;
 import org.mapdb.HTreeMap;
 import org.mapdb.Serializer;
+import org.mapdb.serializer.SerializerArray;
+import org.mapdb.serializer.SerializerArrayTuple;
 
 
 /**
@@ -33,6 +38,7 @@ public class MapDbCatalog implements DbCatalog {
     private static HTreeMap<String, ImmutableList<String>> tableChildren;
     private static HTreeMap<long[], Long> columnWithId;
     private DB file;
+    private static BTreeMap<Object[], Long> columnNames;
 
 
     public MapDbCatalog() {
@@ -74,6 +80,11 @@ public class MapDbCatalog implements DbCatalog {
         tableChildren = db.hashMap( "tableChildren", Serializer.STRING, new GenericSerializer<ImmutableList<String>>() ).createOrOpen();
 
         columnWithId = db.hashMap( "columnsId", Serializer.LONG_ARRAY, Serializer.LONG ).createOrOpen();
+
+        columnNames = db.treeMap( "columnNames" )
+                .keySerializer( new SerializerArrayTuple( Serializer.STRING, Serializer.STRING, Serializer.STRING ) )
+                .valueSerializer( Serializer.LONG )
+                .createOrOpen();
 
         /*schemaChildren = db.treeSet("towns")
                 //set tuple serializer
@@ -190,7 +201,26 @@ public class MapDbCatalog implements DbCatalog {
 
     @Override
     public Long getColumn( Long schemaId, Long tableId ) {
-        return columnWithId.get( new long[]{schemaId, tableId} );
+        return columnWithId.get( new long[]{ schemaId, tableId } );
+    }
+
+
+    public List<Long> getColumn( Pattern schemaName, Pattern tableName, Pattern columnName ) {
+        if ( schemaName != null && tableName != null && columnName != null ) {
+            return columnNames.prefixSubMap( new String[]{ schemaName.pattern, tableName.pattern, columnName.pattern } ).values().stream().collect( Collectors.toList() );
+        }
+        if ( schemaName != null && tableName != null ) {
+            return columnNames.prefixSubMap( new String[]{ schemaName.pattern, tableName.pattern } ).values().stream().collect( Collectors.toList() );
+        }
+        if ( schemaName != null ) {
+            return columnNames.prefixSubMap( new String[]{ schemaName.pattern } ).values().stream().collect( Collectors.toList() );
+        }
+        return null;
+    }
+
+
+    public void addColumn( String schema, String table, String column, Long columnId ) {
+        columnNames.put( new String[]{ schema, table, column }, columnId );
     }
 
 
